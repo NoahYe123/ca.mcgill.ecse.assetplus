@@ -278,23 +278,9 @@ public class TicketStatusController {
         actionColumn.setCellValueFactory(cellData -> {
             int ticketId = cellData.getValue().getId();
             // Create an HBox with three SVGPath objects representing icons
-            Button imgBtn = new Button();
-            imgBtn.getStyleClass().add("icon-image");
-            imgBtn.setPickOnBounds(true);
-            imgBtn.setOnAction(event -> handleImageButtonClicked(ticketId));
-            setCursor(imgBtn);
-            Tooltip imgTooltip = new Tooltip(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketStatus_ViewImages"));
-            imgTooltip.setStyle("-fx-text-fill: #4488D8");
-            imgBtn.setTooltip(imgTooltip);
 
-            Button notesBtn = new Button();
-            notesBtn.getStyleClass().add("icon-notes");
-            notesBtn.setPickOnBounds(true);
-            notesBtn.setOnAction(event -> handleNotesButtonClicked(ticketId));
-            setCursor(notesBtn);
-            Tooltip noteTooltip = new Tooltip(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketStatus_ViewNotes"));
-            noteTooltip.setStyle("-fx-text-fill: #CD6200");
-            notesBtn.setTooltip(noteTooltip);
+
+       
 
             Button editBtn = new Button();
             editBtn.getStyleClass().add("icon-edit");
@@ -314,7 +300,7 @@ public class TicketStatusController {
             trashTooltip.setStyle("-fx-text-fill: #A30D11");
             trashBtn.setTooltip(trashTooltip);
 
-            HBox hbox = new HBox(imgBtn, notesBtn, editBtn, trashBtn);
+            HBox hbox = new HBox( editBtn, trashBtn);
             hbox.setSpacing(10);
             hbox.setAlignment(Pos.CENTER);
 
@@ -345,10 +331,7 @@ public class TicketStatusController {
         }
     }
 
-    private void handleImageButtonClicked(int ticketId) {
-        ViewImagesController controller = (ViewImagesController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewImages.fxml", "View Images");
-        controller.setTicketId(ticketId);
-    }
+
 
     private void handleNotesButtonClicked(int ticketId) {
         ViewNotesController controller = (ViewNotesController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewNotes.fxml", "View Notes");

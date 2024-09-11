@@ -28,8 +28,7 @@ public class ModifyTicketPopUpController {
 
     private static TOMaintenanceTicket ticket;
 
-    @FXML
-    private ComboBox<String> assetNumberField;
+
     
     @FXML
     private Button cancelButton;
@@ -81,10 +80,8 @@ public class ModifyTicketPopUpController {
         ticketNumberField.setFocusTraversable(false);
         ticketStatusField.setFocusTraversable(false);   
         ObservableList<TOSpecificAsset> list2 = ViewUtils.getSpecificAsset();
-        for (TOSpecificAsset asset : list2){
-            assetNumberField.getItems().add(Integer.toString(asset.getAssetNumber()));
-        }
-        assetNumberField.getItems().add("No asset");
+  
+
         updateTicketError.setText(null);
         
     }
@@ -102,9 +99,7 @@ public class ModifyTicketPopUpController {
         LocalDate date = raisedDateField.getValue();
         Date raisedDate = Date.valueOf(date);
         int assetNumber = -1;
-        if (assetNumberField.getValue() != null && !assetNumberField.getValue().equals("No asset")){
-            assetNumber = Integer.parseInt(assetNumberField.getValue());
-        }
+      
 
         if (description == null || description.trim().isEmpty() || raiser == null || raiser.trim().isEmpty()|| raisedDate == null || raisedDate == null){
                 updateTicketError.setText(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketMenu_ErrorMessage1"));
@@ -117,7 +112,7 @@ public class ModifyTicketPopUpController {
                 ticketNumberField.setText("");
                 descriptionField.setText("");
                 raiserField.setText("");
-                assetNumberField.setValue(null);
+
                 typeField.setText(null);
                 raisedDateField.setValue(null);
                 updateTicketError.setText(null);
@@ -150,24 +145,14 @@ public class ModifyTicketPopUpController {
         
         TOAssetType type = ViewUtils.getWithAssetName(ticket.getAssetName());
         List<TOSpecificAsset>  assets = type.getTOSpecificAssets();
-        assetNumberField.setValue(((Integer) ViewUtils.getSpecificAssetFromTicket(ticket)).toString());
-
+ 
         updateTicketError.setText(null);
 
   }
 
 @FXML
 void handleSelection(ActionEvent event) {
-        if (assetNumberField.getValue() != null && !assetNumberField.getValue().equals("No asset")){
-        int assetNumberSelected = Integer.parseInt(assetNumberField.getValue());
-        ObservableList<TOSpecificAsset> list = ViewUtils.getSpecificAsset();
-        for (TOSpecificAsset asset : list){
-           if(asset.getAssetNumber() == assetNumberSelected){
-                typeField.setText(asset.getAssetType().getName());
-           }
-        }
-    
-        }
+
 }
 
 }

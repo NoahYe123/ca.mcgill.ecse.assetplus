@@ -11,15 +11,7 @@ public class DashboardController {
     @FXML
     private VBox Dashboard;
 
-    @FXML
-    private Button tabAssetTypes;
-
-    @FXML
-    private Button tabAssetMenu;
-
-    @FXML
-    private Button tabEmployees;
-
+  
     @FXML
     private Button tabLogOut;
 
@@ -33,11 +25,9 @@ public class DashboardController {
     private Button tabTicketStatus;
 
     private void ClearClassTag() {
-        tabAssetTypes.getStyleClass().remove("currentMenuButton");
-        tabAssetMenu.getStyleClass().remove("currentMenuButton");
-        tabEmployees.getStyleClass().remove("currentMenuButton");
+   
         tabSettings.getStyleClass().remove("currentMenuButton");
-        tabReports.getStyleClass().remove("currentMenuButton");
+     
         tabTicketStatus.getStyleClass().remove("currentMenuButton");
     }
 
@@ -46,15 +36,7 @@ public class DashboardController {
         String tab = AssetPlusFXMLView.getInstance().getCurrentPage();
         ClearClassTag();
         switch (tab) {
-            case "pages/AssetTypes.fxml":
-                tabAssetTypes.getStyleClass().add("currentMenuButton");
-                break;
-            case "pages/AssetMenu.fxml":
-                tabAssetMenu.getStyleClass().add("currentMenuButton");
-                break;
-            case "pages/Employees.fxml":
-                tabEmployees.getStyleClass().add("currentMenuButton");
-                break;
+     
             case "pages/Settings.fxml":
                 tabSettings.getStyleClass().add("currentMenuButton");
                 break;

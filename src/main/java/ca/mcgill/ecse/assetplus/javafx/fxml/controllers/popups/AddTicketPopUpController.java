@@ -33,8 +33,7 @@ public class AddTicketPopUpController {
     @FXML
     private Button addTicketButton;
 
-    @FXML
-    private ComboBox<String> assetNumberField;
+
 
     @FXML
     private TextArea descriptionField;
@@ -54,8 +53,6 @@ public class AddTicketPopUpController {
     @FXML
     private TextField ticketStatusField;
 
-    @FXML
-    private TextField typeField;
 
 
     @FXML
@@ -66,14 +63,11 @@ public class AddTicketPopUpController {
         ticketNumberField.setFocusTraversable(false);
         ticketStatusField.setEditable(false);
         ticketStatusField.setFocusTraversable(false);
-        typeField.setEditable(false);
-        typeField.setFocusTraversable(false);
+  
+;
         //get assets only for the selected type
-        ObservableList<TOSpecificAsset> list2 = ViewUtils.getSpecificAsset();
-        for (TOSpecificAsset asset : list2){
-            assetNumberField.getItems().add(Integer.toString(asset.getAssetNumber()));
-        }
-        assetNumberField.getItems().add("No asset");
+   
+     
         // set editable to false so that the user cannot choose from the calendar
         raisedDateField.setEditable(false);
         // set default value to today
@@ -90,9 +84,7 @@ public class AddTicketPopUpController {
         LocalDate date = raisedDateField.getValue();
         Date raisedDate = Date.valueOf(date);
         int assetNumber = -1;
-        if (assetNumberField.getValue() != null && !assetNumberField.getValue().equals("No asset")){
-            assetNumber = Integer.parseInt(assetNumberField.getValue());
-        }
+       
         if (description == null || description.trim().isEmpty() || raiser == null || raiser.trim().isEmpty()|| raisedDate == null || raisedDate == null){
                 addTicketError.setText(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketMenu_ErrorMessage1"));
         }
@@ -107,8 +99,7 @@ public class AddTicketPopUpController {
                 ticketNumberField.setText("");
                 descriptionField.setText("");
                 raiserField.setText("");
-                assetNumberField.setValue(null);
-                typeField.setText(null);
+             
                 raisedDateField.setValue(null);
                 addTicketError.setText(null);
                 AssetPlusFXMLView.getInstance().closePopUpWindow();    
@@ -127,17 +118,7 @@ public class AddTicketPopUpController {
 
     @FXML
     void handleAssetNumberSelection(ActionEvent event) {
-        if (assetNumberField.getValue() != null && !assetNumberField.getValue().equals("No asset")){
-            //if (!assetNumberField.getValue().equals("No asset")){
-        int assetNumberSelected = Integer.parseInt(assetNumberField.getValue());
-        ObservableList<TOSpecificAsset> list = ViewUtils.getSpecificAsset();
-        for (TOSpecificAsset asset : list){
-           if(asset.getAssetNumber() == assetNumberSelected){
-                typeField.setText(asset.getAssetType().getName());
-           }
-        //}
-        }
-        }
+
     }
 }
 
