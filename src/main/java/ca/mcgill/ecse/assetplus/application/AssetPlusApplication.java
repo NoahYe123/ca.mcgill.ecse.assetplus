@@ -4,7 +4,7 @@ import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.model.AssetPlus;
 import javafx.application.Application;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
-
+// Test
 public class AssetPlusApplication {
 
   private static AssetPlus assetPlus;
