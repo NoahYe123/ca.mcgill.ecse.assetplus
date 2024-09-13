@@ -1,6 +1,5 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups;
 
-import ca.mcgill.ecse.assetplus.controller.TOAssetType;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils;
@@ -20,7 +19,6 @@ import javafx.scene.control.TextField;
 import java.util.List;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
-import ca.mcgill.ecse.assetplus.controller.TOSpecificAsset;
 
 public class ModifyTicketPopUpController {
 
@@ -79,7 +77,6 @@ public class ModifyTicketPopUpController {
     void initialize(){
         ticketNumberField.setFocusTraversable(false);
         ticketStatusField.setFocusTraversable(false);   
-        ObservableList<TOSpecificAsset> list2 = ViewUtils.getSpecificAsset();
   
 
         updateTicketError.setText(null);
@@ -137,15 +134,9 @@ public class ModifyTicketPopUpController {
         ticket = AssetPlusFeatureSet6Controller.getTicket(ticketId);
         
         ticketNumberField.setText(Integer.toString(ticketId));
-        ticketStatusField.setText(ticket.getStatus().toString());
         descriptionField.setText(ticket.getDescription());
-        raiserField.setText(ticket.getRaisedByEmail());
-        typeField.setText(ticket.getAssetName());
         raisedDateField.setValue(ticket.getRaisedOnDate().toLocalDate());
         
-        TOAssetType type = ViewUtils.getWithAssetName(ticket.getAssetName());
-        List<TOSpecificAsset>  assets = type.getTOSpecificAssets();
- 
         updateTicketError.setText(null);
 
   }

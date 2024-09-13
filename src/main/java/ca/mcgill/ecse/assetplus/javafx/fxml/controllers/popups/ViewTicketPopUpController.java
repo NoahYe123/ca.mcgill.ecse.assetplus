@@ -58,28 +58,12 @@ public class ViewTicketPopUpController {
 
     private void initializeLabels() {
       ticket = ViewUtils.getTicket(ticketId);
-      String text = ticket.getApprovalRequired() ? "Yes" : "No";
-      approvalRequiredField.setText(text);
 
-      assetNumberField.setText(String.valueOf(ViewUtils.getSpecificAssetFromTicket(ViewUtils.getTicket(ticketId))));
-      assetTypeField.setText(ticket.getAssetName());
       descriptionField.setText(ticket.getDescription());
 
-      priorityButton.setText(ticket.getPriority());
-      if (!ticket.getPriority().isEmpty()) {
-        priorityButton.setStyle(getPriorityStyle(ticket.getPriority()));
-      } else {
-        priorityButton.setVisible(false);
-      }
-
-      statusButton.setText(ticket.getStatus());
-      statusButton.setStyle(TicketStatusController.getStyle(ticket.getStatus()));
 
       raisedOnDateField.setText(ticket.getRaisedOnDate().toString());
       ticketNumberField.setText(String.valueOf(ticket.getId()));
-      ticketRaiserField.setText(ticket.getRaisedByEmail());
-      assigneeField.setText(ticket.getFixedByEmail());
-      timeEstimateField.setText(ticket.getTimeToResolve());
     }
 
     private String getPriorityStyle(String priority) {

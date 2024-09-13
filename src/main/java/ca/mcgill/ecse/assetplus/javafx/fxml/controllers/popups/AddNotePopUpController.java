@@ -1,7 +1,6 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups;
 
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
-import ca.mcgill.ecse.assetplus.controller.TOHotelStaff;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils;
 import javafx.event.ActionEvent;
@@ -50,10 +49,6 @@ public class AddNotePopUpController {
 
     LocalDate localDate = LocalDate.now();
     datePicker.setValue(localDate);
-
-    for (TOHotelStaff staff: ViewUtils.getHotelStaffs()) {
-      this.authorEmail.getItems().add(staff.getEmail());
-    }
   }
 
   @FXML
@@ -67,7 +62,6 @@ public class AddNotePopUpController {
     } else if (desc.isEmpty()) {
       errorMessage.setText(AssetPlusFXMLView.getInstance().getBundle().getString("key.AddNote_ErrorDescription"));
     } else if (isDisapproveNote) {
-      ViewUtils.disapproveTicket(ticketId, date, desc);
       ViewUtils.callController("");
       AssetPlusFXMLView.getInstance().closePopUpWindow();
       AssetPlusFXMLView.getInstance().closePopUpWindow();

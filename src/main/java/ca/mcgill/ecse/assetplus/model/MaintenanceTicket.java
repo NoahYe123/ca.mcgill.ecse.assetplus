@@ -1,25 +1,14 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+/*This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!*/
 
 package ca.mcgill.ecse.assetplus.model;
-import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
-import java.sql.Date;
 import java.util.*;
+import java.sql.Date;
 
-/**
- * Authors: Émilia Gagné, Julia Grenier, Camille Pouliot, Anjali Singhal
- */
-// line 4 "../../../../../../MaintenanceTicket.ump"
-// line 45 "../../../../../../AssetPlus.ump"
+// line 8 "../../../../../AssetPlusPersistence.ump"
+// line 11 "../../../../../AssetPlus.ump"
 public class MaintenanceTicket
 {
-
-  //------------------------
-  // ENUMERATIONS
-  //------------------------
-
-  public enum TimeEstimate { LessThanADay, OneToThreeDays, ThreeToSevenDays, OneToThreeWeeks, ThreeOrMoreWeeks }
-  public enum PriorityLevel { Urgent, Normal, Low }
 
   //------------------------
   // STATIC VARIABLES
@@ -35,27 +24,16 @@ public class MaintenanceTicket
   private int id;
   private Date raisedOnDate;
   private String description;
-  private TimeEstimate timeToResolve;
-  private PriorityLevel priority;
-
-  //MaintenanceTicket State Machines
-  public enum Status { Open, Assigned, InProgress, Resolved, Closed }
-  private Status status;
 
   //MaintenanceTicket Associations
   private List<MaintenanceNote> ticketNotes;
-  private List<TicketImage> ticketImages;
   private AssetPlus assetPlus;
-  private User ticketRaiser;
-  private HotelStaff ticketFixer;
-  private SpecificAsset asset;
-  private Manager fixApprover;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public MaintenanceTicket(int aId, Date aRaisedOnDate, String aDescription, AssetPlus aAssetPlus, User aTicketRaiser)
+  public MaintenanceTicket(int aId, Date aRaisedOnDate, String aDescription, AssetPlus aAssetPlus)
   {
     raisedOnDate = aRaisedOnDate;
     description = aDescription;
@@ -64,18 +42,11 @@ public class MaintenanceTicket
       throw new RuntimeException("Cannot create due to duplicate id. See http://manual.umple.org?RE003ViolationofUniqueness.html");
     }
     ticketNotes = new ArrayList<MaintenanceNote>();
-    ticketImages = new ArrayList<TicketImage>();
     boolean didAddAssetPlus = setAssetPlus(aAssetPlus);
     if (!didAddAssetPlus)
     {
       throw new RuntimeException("Unable to create maintenanceTicket due to assetPlus. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
-    boolean didAddTicketRaiser = setTicketRaiser(aTicketRaiser);
-    if (!didAddTicketRaiser)
-    {
-      throw new RuntimeException("Unable to create raisedTicket due to ticketRaiser. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
-    setStatus(Status.Open);
   }
 
   //------------------------
@@ -117,22 +88,6 @@ public class MaintenanceTicket
     return wasSet;
   }
 
-  public boolean setTimeToResolve(TimeEstimate aTimeToResolve)
-  {
-    boolean wasSet = false;
-    timeToResolve = aTimeToResolve;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public boolean setPriority(PriorityLevel aPriority)
-  {
-    boolean wasSet = false;
-    priority = aPriority;
-    wasSet = true;
-    return wasSet;
-  }
-
   public int getId()
   {
     return id;
@@ -156,136 +111,6 @@ public class MaintenanceTicket
   public String getDescription()
   {
     return description;
-  }
-
-  public TimeEstimate getTimeToResolve()
-  {
-    return timeToResolve;
-  }
-
-  public PriorityLevel getPriority()
-  {
-    return priority;
-  }
-
-  public String getStatusFullName()
-  {
-    String answer = status.toString();
-    return answer;
-  }
-
-  public Status getStatus()
-  {
-    return status;
-  }
-
-  public boolean managerReviews(HotelStaff staff,PriorityLevel priority,TimeEstimate timeToResolve,boolean approvalRequired)
-  {
-    boolean wasEventProcessed = false;
-    
-    Status aStatus = status;
-    switch (aStatus)
-    {
-      case Open:
-        // line 11 "../../../../../../MaintenanceTicket.ump"
-        doReview(staff, priority, timeToResolve, approvalRequired);
-        setStatus(Status.Assigned);
-        wasEventProcessed = true;
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
-  }
-
-  public boolean startWork()
-  {
-    boolean wasEventProcessed = false;
-    
-    Status aStatus = status;
-    switch (aStatus)
-    {
-      case Assigned:
-        setStatus(Status.InProgress);
-        wasEventProcessed = true;
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
-  }
-
-  public boolean completeWork()
-  {
-    boolean wasEventProcessed = false;
-    
-    Status aStatus = status;
-    switch (aStatus)
-    {
-      case InProgress:
-        if (hasFixApprover())
-        {
-          setStatus(Status.Resolved);
-          wasEventProcessed = true;
-          break;
-        }
-        if (!(hasFixApprover()))
-        {
-          setStatus(Status.Closed);
-          wasEventProcessed = true;
-          break;
-        }
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
-  }
-
-  public boolean approveWork()
-  {
-    boolean wasEventProcessed = false;
-    
-    Status aStatus = status;
-    switch (aStatus)
-    {
-      case Resolved:
-        setStatus(Status.Closed);
-        wasEventProcessed = true;
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
-  }
-
-  public boolean disapproveWork(Date date,String desc)
-  {
-    boolean wasEventProcessed = false;
-    
-    Status aStatus = status;
-    switch (aStatus)
-    {
-      case Resolved:
-        // line 24 "../../../../../../MaintenanceTicket.ump"
-        doDisapproveWork(date, desc);
-        setStatus(Status.InProgress);
-        wasEventProcessed = true;
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
-  }
-
-  private void setStatus(Status aStatus)
-  {
-    status = aStatus;
   }
   /* Code from template association_GetMany */
   public MaintenanceNote getTicketNote(int index)
@@ -317,78 +142,10 @@ public class MaintenanceTicket
     int index = ticketNotes.indexOf(aTicketNote);
     return index;
   }
-  /* Code from template association_GetMany */
-  public TicketImage getTicketImage(int index)
-  {
-    TicketImage aTicketImage = ticketImages.get(index);
-    return aTicketImage;
-  }
-
-  public List<TicketImage> getTicketImages()
-  {
-    List<TicketImage> newTicketImages = Collections.unmodifiableList(ticketImages);
-    return newTicketImages;
-  }
-
-  public int numberOfTicketImages()
-  {
-    int number = ticketImages.size();
-    return number;
-  }
-
-  public boolean hasTicketImages()
-  {
-    boolean has = ticketImages.size() > 0;
-    return has;
-  }
-
-  public int indexOfTicketImage(TicketImage aTicketImage)
-  {
-    int index = ticketImages.indexOf(aTicketImage);
-    return index;
-  }
   /* Code from template association_GetOne */
   public AssetPlus getAssetPlus()
   {
     return assetPlus;
-  }
-  /* Code from template association_GetOne */
-  public User getTicketRaiser()
-  {
-    return ticketRaiser;
-  }
-  /* Code from template association_GetOne */
-  public HotelStaff getTicketFixer()
-  {
-    return ticketFixer;
-  }
-
-  public boolean hasTicketFixer()
-  {
-    boolean has = ticketFixer != null;
-    return has;
-  }
-  /* Code from template association_GetOne */
-  public SpecificAsset getAsset()
-  {
-    return asset;
-  }
-
-  public boolean hasAsset()
-  {
-    boolean has = asset != null;
-    return has;
-  }
-  /* Code from template association_GetOne */
-  public Manager getFixApprover()
-  {
-    return fixApprover;
-  }
-
-  public boolean hasFixApprover()
-  {
-    boolean has = fixApprover != null;
-    return has;
   }
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfTicketNotes()
@@ -396,9 +153,9 @@ public class MaintenanceTicket
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public MaintenanceNote addTicketNote(Date aDate, String aDescription, HotelStaff aNoteTaker)
+  public MaintenanceNote addTicketNote(int aId, Date aDate, String aDescription)
   {
-    return new MaintenanceNote(aDate, aDescription, this, aNoteTaker);
+    return new MaintenanceNote(aId, aDate, aDescription, this);
   }
 
   public boolean addTicketNote(MaintenanceNote aTicketNote)
@@ -462,78 +219,6 @@ public class MaintenanceTicket
     }
     return wasAdded;
   }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfTicketImages()
-  {
-    return 0;
-  }
-  /* Code from template association_AddManyToOne */
-  public TicketImage addTicketImage(String aImageURL)
-  {
-    return new TicketImage(aImageURL, this);
-  }
-
-  public boolean addTicketImage(TicketImage aTicketImage)
-  {
-    boolean wasAdded = false;
-    if (ticketImages.contains(aTicketImage)) { return false; }
-    MaintenanceTicket existingTicket = aTicketImage.getTicket();
-    boolean isNewTicket = existingTicket != null && !this.equals(existingTicket);
-    if (isNewTicket)
-    {
-      aTicketImage.setTicket(this);
-    }
-    else
-    {
-      ticketImages.add(aTicketImage);
-    }
-    wasAdded = true;
-    return wasAdded;
-  }
-
-  public boolean removeTicketImage(TicketImage aTicketImage)
-  {
-    boolean wasRemoved = false;
-    //Unable to remove aTicketImage, as it must always have a ticket
-    if (!this.equals(aTicketImage.getTicket()))
-    {
-      ticketImages.remove(aTicketImage);
-      wasRemoved = true;
-    }
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addTicketImageAt(TicketImage aTicketImage, int index)
-  {  
-    boolean wasAdded = false;
-    if(addTicketImage(aTicketImage))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfTicketImages()) { index = numberOfTicketImages() - 1; }
-      ticketImages.remove(aTicketImage);
-      ticketImages.add(index, aTicketImage);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMoveTicketImageAt(TicketImage aTicketImage, int index)
-  {
-    boolean wasAdded = false;
-    if(ticketImages.contains(aTicketImage))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfTicketImages()) { index = numberOfTicketImages() - 1; }
-      ticketImages.remove(aTicketImage);
-      ticketImages.add(index, aTicketImage);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addTicketImageAt(aTicketImage, index);
-    }
-    return wasAdded;
-  }
   /* Code from template association_SetOneToMany */
   public boolean setAssetPlus(AssetPlus aAssetPlus)
   {
@@ -553,76 +238,6 @@ public class MaintenanceTicket
     wasSet = true;
     return wasSet;
   }
-  /* Code from template association_SetOneToMany */
-  public boolean setTicketRaiser(User aTicketRaiser)
-  {
-    boolean wasSet = false;
-    if (aTicketRaiser == null)
-    {
-      return wasSet;
-    }
-
-    User existingTicketRaiser = ticketRaiser;
-    ticketRaiser = aTicketRaiser;
-    if (existingTicketRaiser != null && !existingTicketRaiser.equals(aTicketRaiser))
-    {
-      existingTicketRaiser.removeRaisedTicket(this);
-    }
-    ticketRaiser.addRaisedTicket(this);
-    wasSet = true;
-    return wasSet;
-  }
-  /* Code from template association_SetOptionalOneToMany */
-  public boolean setTicketFixer(HotelStaff aTicketFixer)
-  {
-    boolean wasSet = false;
-    HotelStaff existingTicketFixer = ticketFixer;
-    ticketFixer = aTicketFixer;
-    if (existingTicketFixer != null && !existingTicketFixer.equals(aTicketFixer))
-    {
-      existingTicketFixer.removeMaintenanceTask(this);
-    }
-    if (aTicketFixer != null)
-    {
-      aTicketFixer.addMaintenanceTask(this);
-    }
-    wasSet = true;
-    return wasSet;
-  }
-  /* Code from template association_SetOptionalOneToMany */
-  public boolean setAsset(SpecificAsset aAsset)
-  {
-    boolean wasSet = false;
-    SpecificAsset existingAsset = asset;
-    asset = aAsset;
-    if (existingAsset != null && !existingAsset.equals(aAsset))
-    {
-      existingAsset.removeMaintenanceTicket(this);
-    }
-    if (aAsset != null)
-    {
-      aAsset.addMaintenanceTicket(this);
-    }
-    wasSet = true;
-    return wasSet;
-  }
-  /* Code from template association_SetOptionalOneToMany */
-  public boolean setFixApprover(Manager aFixApprover)
-  {
-    boolean wasSet = false;
-    Manager existingFixApprover = fixApprover;
-    fixApprover = aFixApprover;
-    if (existingFixApprover != null && !existingFixApprover.equals(aFixApprover))
-    {
-      existingFixApprover.removeTicketsForApproval(this);
-    }
-    if (aFixApprover != null)
-    {
-      aFixApprover.addTicketsForApproval(this);
-    }
-    wasSet = true;
-    return wasSet;
-  }
 
   public void delete()
   {
@@ -634,61 +249,16 @@ public class MaintenanceTicket
       ticketNotes.remove(aTicketNote);
     }
     
-    while (ticketImages.size() > 0)
-    {
-      TicketImage aTicketImage = ticketImages.get(ticketImages.size() - 1);
-      aTicketImage.delete();
-      ticketImages.remove(aTicketImage);
-    }
-    
     AssetPlus placeholderAssetPlus = assetPlus;
     this.assetPlus = null;
     if(placeholderAssetPlus != null)
     {
       placeholderAssetPlus.removeMaintenanceTicket(this);
     }
-    User placeholderTicketRaiser = ticketRaiser;
-    this.ticketRaiser = null;
-    if(placeholderTicketRaiser != null)
-    {
-      placeholderTicketRaiser.removeRaisedTicket(this);
-    }
-    if (ticketFixer != null)
-    {
-      HotelStaff placeholderTicketFixer = ticketFixer;
-      this.ticketFixer = null;
-      placeholderTicketFixer.removeMaintenanceTask(this);
-    }
-    if (asset != null)
-    {
-      SpecificAsset placeholderAsset = asset;
-      this.asset = null;
-      placeholderAsset.removeMaintenanceTicket(this);
-    }
-    if (fixApprover != null)
-    {
-      Manager placeholderFixApprover = fixApprover;
-      this.fixApprover = null;
-      placeholderFixApprover.removeTicketsForApproval(this);
-    }
   }
 
-  // line 33 "../../../../../../MaintenanceTicket.ump"
-   private void doReview(HotelStaff staff, PriorityLevel priority, TimeEstimate timeToResolve, boolean approvalRequired){
-    setTicketFixer(staff);
-      setPriority(priority);
-      setTimeToResolve(timeToResolve);
-      setFixApprover(approvalRequired ? AssetPlusApplication.getAssetPlus().getManager() : null);
-  }
-
-  // line 40 "../../../../../../MaintenanceTicket.ump"
-   private void doDisapproveWork(Date date, String desc){
-    MaintenanceNote newNote = addTicketNote(date, desc, AssetPlusApplication.getAssetPlus().getManager());
-    addTicketNote(newNote);
-  }
-
-  // line 28 "AssetPlusPersistence.ump"
-  public static  void reinitializeUniqueId(List<MaintenanceTicket> tickets){
+  // line 10 "../../../../../AssetPlusPersistence.ump"
+   public static  void reinitializeUniqueId(List<MaintenanceTicket> tickets){
     maintenanceticketsById = new HashMap<Integer, MaintenanceTicket>();
     for (MaintenanceTicket t : tickets) {
       maintenanceticketsById.put(t.getId(), t);
@@ -702,13 +272,6 @@ public class MaintenanceTicket
             "id" + ":" + getId()+ "," +
             "description" + ":" + getDescription()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "raisedOnDate" + "=" + (getRaisedOnDate() != null ? !getRaisedOnDate().equals(this)  ? getRaisedOnDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "timeToResolve" + "=" + (getTimeToResolve() != null ? !getTimeToResolve().equals(this)  ? getTimeToResolve().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "priority" + "=" + (getPriority() != null ? !getPriority().equals(this)  ? getPriority().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "assetPlus = "+(getAssetPlus()!=null?Integer.toHexString(System.identityHashCode(getAssetPlus())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "ticketRaiser = "+(getTicketRaiser()!=null?Integer.toHexString(System.identityHashCode(getTicketRaiser())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "ticketFixer = "+(getTicketFixer()!=null?Integer.toHexString(System.identityHashCode(getTicketFixer())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "asset = "+(getAsset()!=null?Integer.toHexString(System.identityHashCode(getAsset())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "fixApprover = "+(getFixApprover()!=null?Integer.toHexString(System.identityHashCode(getFixApprover())):"null");
+            "  " + "assetPlus = "+(getAssetPlus()!=null?Integer.toHexString(System.identityHashCode(getAssetPlus())):"null");
   }
-
 }

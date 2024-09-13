@@ -3,12 +3,8 @@ package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.AddTicketPopUpController;
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ApproveTicketController;
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.AssignStaffToTicketController;
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.StartAndCompleteWorkController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ModifyTicketPopUpController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.DeleteTicketPopUpController;
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewImagesController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewNotesController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewTicketPopUpController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.events.AssetTypeDeletedEvent;
@@ -122,14 +118,12 @@ public class TicketStatusController {
         FilteredList<TOMaintenanceTicket> filteredTickets = new FilteredList<>(ticketList);
     
         filteredTickets.setPredicate(ticket -> {
-            boolean assetNumberMatch = assetNumberText == 0 || ViewUtils.getSpecificAssetFromTicket(ticket) == assetNumberText;
-            boolean raiserMatch = raiser.isEmpty() || ticket.getRaisedByEmail().toLowerCase().contains(raiser);
             boolean ticketNumberMatch = number == 0 || ticket.getId() == number;
             boolean dateMatch = searchDate == null || ticket.getRaisedOnDate().toLocalDate().isEqual(searchDate);
            
-            boolean statusMatch = "Tous les billets".equals(statusChoiceBox.getValue()) || "Show All".equals(statusChoiceBox.getValue()) || statusText.toString().equals(ticket.getStatus()); 
+            boolean statusMatch = "Tous les billets".equals(statusChoiceBox.getValue()) || "Show All".equals(statusChoiceBox.getValue()); 
     
-            return raiserMatch && ticketNumberMatch && dateMatch && assetNumberMatch && statusMatch;
+            return ticketNumberMatch && dateMatch && statusMatch;
         });
     
         ticketTable.setItems(filteredTickets);
@@ -182,18 +176,6 @@ public class TicketStatusController {
         AddTicketPopUpController controller = (AddTicketPopUpController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/AddTicketPopUp.fxml", "Add Ticket");
     }
 
-    @FXML
-    void filterTableView(String selectedStatus) {
-        ObservableList<TOMaintenanceTicket> items = ticketTable.getItems();
-
-        if (selectedStatus == null || selectedStatus.equals("key.ShowAll")) {
-            ticketTable.setItems(items);
-        } else {
-            FilteredList<TOMaintenanceTicket> filteredList = new FilteredList<>(ticketList, ticket -> selectedStatus.contains(ticket.getStatus()));
-            ticketTable.setItems(filteredList);
-        }
-    }
-
     private String getKey(String text) {
         for (String key: resources.keySet()) {
             if (resources.getString(key).equals(text)) {
@@ -217,27 +199,10 @@ public class TicketStatusController {
     }
 
     private void showTableView() {
-        assetColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAssetName()));
-        reporterColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRaisedByEmail()));
-        assigneeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFixedByEmail()));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         dateStartedColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRaisedOnDate().toLocalDate().format(formatter)));
-        assigneeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFixedByEmail()));
         
-        statusColumn.setCellValueFactory(cellData -> {
-            int ticketId = cellData.getValue().getId();
-            String status = cellData.getValue().getStatus();
-            Button statusButton = new Button(resources.getString("key.TicketStatus_" + status));
-            statusButton.setStyle(getStyle(status));
-            setCursor(statusButton);
-            statusButton.setOnAction(event -> handleStatusCellClicked("key.TicketStatus_" + status, ticketId));
-            Tooltip statusToolTip = new Tooltip(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketStatus_ChangeStatus"));
-            statusToolTip.setStyle("-fx-text-fill: #808080");
-            statusButton.setTooltip(statusToolTip);
-    
-            return new SimpleObjectProperty<>(statusButton);
-        });
 
         ticketList = ViewUtils.getMaintenanceTickets();
         ticketTable.setItems(ticketList);
@@ -247,18 +212,6 @@ public class TicketStatusController {
             Hyperlink link = new Hyperlink(String.valueOf(ticketId));
             link.setStyle("-fx-text-fill: #8768F2; -fx-underline: true; -fx-cursor: hand;");
             link.setOnAction(event -> handleTicketClicked(ticketId));
-
-            return new SimpleObjectProperty<>(link);
-        });
-
-        assetNumberColumn.setCellValueFactory(cellData -> {
-            int assetNumber = ViewUtils.getSpecificAssetFromTicket(cellData.getValue());
-            Hyperlink link = new Hyperlink(String.valueOf(assetNumber));
-            if (assetNumber == -1) {
-                link.setVisible(false);
-            }
-            link.setStyle("-fx-text-fill: #8768F2; -fx-underline: true; -fx-cursor: hand;");
-            link.setOnAction(event -> handleAssetNumberClicked(assetNumber));
 
             return new SimpleObjectProperty<>(link);
         });
@@ -309,29 +262,6 @@ public class TicketStatusController {
         });
     }
 
-    private void handleStatusCellClicked(String status, int ticketId) {
-        StartAndCompleteWorkController sharedController;
-        switch (status) {
-            case "key.TicketStatus_Open":
-                AssignStaffToTicketController controller1 = (AssignStaffToTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/AssignStaffToTicket.fxml", "Assign Staff To Ticket");
-                controller1.setTicketId(ticketId);
-                break;
-            case "key.TicketStatus_Assigned":
-                sharedController = (StartAndCompleteWorkController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/StartWork.fxml", "Start Work");
-                sharedController.setTicketId(ticketId);
-                break;
-            case "key.TicketStatus_InProgress":
-                sharedController = (StartAndCompleteWorkController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/CompleteWork.fxml", "Complete Work");
-                sharedController.setTicketId(ticketId);
-                break;
-            case "key.TicketStatus_Resolved":
-                ApproveTicketController controller2 = (ApproveTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ApproveTicket.fxml", "Approve Ticket");
-                controller2.setTicketId(ticketId);
-                break;
-        }
-    }
-
-
 
     private void handleNotesButtonClicked(int ticketId) {
         ViewNotesController controller = (ViewNotesController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewNotes.fxml", "View Notes");
@@ -357,8 +287,8 @@ public class TicketStatusController {
     }
 
     private void handleAssetNumberClicked(int assetNumber) {
-        AssetMenuController controller = (AssetMenuController) AssetPlusFXMLView.getInstance().changeTab("pages/AssetMenu.fxml");
-        controller.setAssetNumber(assetNumber);
+//        AssetMenuController controller = (AssetMenuController) AssetPlusFXMLView.getInstance().changeTab("pages/AssetMenu.fxml");
+//        controller.setAssetNumber(assetNumber);
     }
 
     private void handleDeleted(List<Integer> ticketIdsToDelete) {

@@ -1,7 +1,6 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureTOController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -69,11 +68,6 @@ public class FrontPageController {
       ticketBox.setOpacity(0);
       assetBox.setOpacity(0);
       loginButton.setOpacity(0);
-
-      employeeCount.setText(ViewUtils.getHotelStaffs().size()+"");
-      guestCount.setText(AssetPlusFeatureTOController.getAllGuests().size()+"");
-      ticketCount.setText(AssetPlusFeatureSet6Controller.getTickets().size()+"");
-      assetCount.setText(ViewUtils.getSpecificAsset().size()+"");
 
       // Animate
       FadeTransition fadeInImage = new FadeTransition(Duration.seconds(2), image);

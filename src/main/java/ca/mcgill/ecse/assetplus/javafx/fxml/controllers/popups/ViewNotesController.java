@@ -114,8 +114,6 @@ public class ViewNotesController {
             HBox authorBox = new HBox();
             Label authorPrefix = new Label(AssetPlusFXMLView.getInstance().getBundle().getString("key.ViewNotes_Author"));
             authorPrefix.getStyleClass().add("noteText");
-            Label author = new Label(note.getNoteTakerEmail());
-            authorBox.getChildren().addAll(authorPrefix, author);
 
             Label descPrefix = new Label(AssetPlusFXMLView.getInstance().getBundle().getString("key.ViewNotes_Description"));
             descPrefix.getStyleClass().add("noteText");

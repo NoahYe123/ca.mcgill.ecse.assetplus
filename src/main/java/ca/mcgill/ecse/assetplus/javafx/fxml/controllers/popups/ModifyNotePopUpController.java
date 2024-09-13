@@ -1,7 +1,6 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups;
 
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
-import ca.mcgill.ecse.assetplus.controller.TOHotelStaff;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceNote;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils;
@@ -43,9 +42,6 @@ public class ModifyNotePopUpController {
     ticketId = -1;
     errorMessage.setText("");
 
-    for (TOHotelStaff staff: ViewUtils.getHotelStaffs()) {
-      this.authorEmail.getItems().add(staff.getEmail());
-    }
   }
 
   @FXML
@@ -78,7 +74,6 @@ public class ModifyNotePopUpController {
 
     TOMaintenanceNote note = ViewUtils.getTicketNotes(id).get(index);
     datePicker.setValue(note.getDate().toLocalDate());
-    authorEmail.setValue(note.getNoteTakerEmail());
     descriptionField.setText(note.getDescription());
   }
 

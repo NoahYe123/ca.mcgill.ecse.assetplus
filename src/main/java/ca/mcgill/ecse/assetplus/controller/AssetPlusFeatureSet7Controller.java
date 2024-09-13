@@ -1,10 +1,8 @@
 package ca.mcgill.ecse.assetplus.controller;
 
 import java.sql.Date;
-import ca.mcgill.ecse.assetplus.model.HotelStaff;
 import ca.mcgill.ecse.assetplus.model.MaintenanceNote;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
-import ca.mcgill.ecse.assetplus.model.User;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 /**
@@ -26,8 +24,7 @@ public class AssetPlusFeatureSet7Controller {
       String email) {
 
         String err = AssetPlusFeatureUtility.isDescriptionEmpty(description) + 
-                     AssetPlusFeatureUtility.isExistingTicket(ticketID) + 
-                     AssetPlusFeatureUtility.isExistingUser(email, "hotel staff");
+                     AssetPlusFeatureUtility.isExistingTicket(ticketID);
 
         if (!err.isEmpty()) {
           return err;
@@ -35,8 +32,7 @@ public class AssetPlusFeatureSet7Controller {
 
         try {
           MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
-          HotelStaff hotelStaff =  (HotelStaff) User.getWithEmail(email);
-          MaintenanceNote note = ticket.addTicketNote(date, description, hotelStaff);
+          MaintenanceNote note = ticket.addTicketNote(ticketID, date, description);
           ticket.addTicketNote(note);
 
         } catch (RuntimeException e){
@@ -60,7 +56,6 @@ public class AssetPlusFeatureSet7Controller {
 
         String err = AssetPlusFeatureUtility.isDescriptionEmpty(newDescription) +
                      AssetPlusFeatureUtility.isExistingTicket(ticketID) +
-                     AssetPlusFeatureUtility.isExistingUser(newEmail, "hotel staff") + 
                      isExistingNote(ticketID, index);
 
         if (!err.isEmpty()) {
@@ -73,9 +68,6 @@ public class AssetPlusFeatureSet7Controller {
           MaintenanceNote note = ticket.getTicketNote(index);
           note.setDate(newDate);
           note.setDescription(newDescription);
-
-          HotelStaff staff = (HotelStaff) User.getWithEmail(newEmail);
-          note.setNoteTaker(staff);
         }
         AssetPlusPersistence.save();
         return "";

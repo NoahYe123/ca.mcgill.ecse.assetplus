@@ -4,13 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
-import ca.mcgill.ecse.assetplus.model.Employee;
-import ca.mcgill.ecse.assetplus.model.Guest;
 import ca.mcgill.ecse.assetplus.model.MaintenanceNote;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
-import ca.mcgill.ecse.assetplus.model.SpecificAsset;
-import ca.mcgill.ecse.assetplus.model.TicketImage;
-import ca.mcgill.ecse.assetplus.model.User;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 /**
@@ -18,31 +13,6 @@ import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
  * @author Tayba Jusab
  */
 public class AssetPlusFeatureSet6Controller {
-
-  /**
-   * <p>Delete an employee or guest based on their email</p>
-   * @param email the email of the user
-   */
-  public static void deleteEmployeeOrGuest(String email) {
-    // Input validations
-    String err = AssetPlusFeatureUtility.isStringValid(email, "email", "cannot")
-        + AssetPlusFeatureUtility.isExistingUser(email, "");
-    if (!err.isEmpty()) {
-      return;
-    }
-
-    User userToDelete = User.getWithEmail(email);
-
-    if (userToDelete instanceof Employee) {
-      Employee employee = (Employee) userToDelete;
-      employee.delete();
-    } else if (userToDelete instanceof Guest) {
-      Guest guest = (Guest) userToDelete;
-      guest.delete();
-    }
-    AssetPlusPersistence.save();
-
-  }
 
   /**
    * <p>Get a list of all maintenance tickets as transfer objects</p>
@@ -83,38 +53,11 @@ public class AssetPlusFeatureSet6Controller {
         convertFromMaintenanceNotes(maintenanceTicket.getTicketNotes());
     TOMaintenanceNote[] allNotes = toMaintenanceNotes.toArray(new TOMaintenanceNote[0]);
 
-    String assetName;
-    Integer expectedLifeSpanInDays;
-    Date purchaseDate;
-    Integer floorNumber;
-    Integer roomNumber;
-
-    if (maintenanceTicket.getAsset() == null) {
-      assetName = null;
-      expectedLifeSpanInDays = -1;
-      purchaseDate = null;
-      floorNumber = -1;
-      roomNumber = -1;
-    } else {
-      assetName = maintenanceTicket.getAsset().getAssetType().getName();
-      expectedLifeSpanInDays = maintenanceTicket.getAsset().getAssetType().getExpectedLifeSpan();
-      purchaseDate = maintenanceTicket.getAsset().getPurchaseDate();
-      floorNumber = maintenanceTicket.getAsset().getFloorNumber();
-      roomNumber = maintenanceTicket.getAsset().getRoomNumber();
-    }
 
     return new TOMaintenanceTicket(
       maintenanceTicket.getId(), 
       maintenanceTicket.getRaisedOnDate(),
       maintenanceTicket.getDescription(), 
-      maintenanceTicket.getTicketRaiser().getEmail(), 
-      maintenanceTicket.getStatusFullName(), 
-      maintenanceTicket.hasTicketFixer() ? maintenanceTicket.getTicketFixer().getEmail() : "", 
-      maintenanceTicket.getTimeToResolve() != null ? maintenanceTicket.getTimeToResolve().toString() : "", 
-      maintenanceTicket.getPriority() != null ? maintenanceTicket.getPriority().toString() : "",
-      maintenanceTicket.hasFixApprover(), 
-      assetName, expectedLifeSpanInDays, purchaseDate, floorNumber, roomNumber, 
-      convertFromTicketImages(maintenanceTicket.getTicketImages()),
       allNotes);
   }
 
@@ -129,41 +72,9 @@ public class AssetPlusFeatureSet6Controller {
 
     for (MaintenanceNote maintenanceNote : maintenanceNotes) {
       TOMaintenanceNote toMaintenanceNote = new TOMaintenanceNote(maintenanceNote.getDate(),
-          maintenanceNote.getDescription(), maintenanceNote.getNoteTaker().getEmail());
+          maintenanceNote.getDescription());
       toMaintenanceNotes.add(toMaintenanceNote);
     }
     return toMaintenanceNotes;
-  }
-
-  /**
-   * <p>Converts a list of TicketImage object into a list of image url strings</p>
-   * @param ticketImages the list of TicketImage to convert
-   * @return the converted list of image url strings
-   */
-  private static List<String> convertFromTicketImages(List<TicketImage> ticketImages) {
-    List<String> imageURLS = new ArrayList<>();
-
-    for (TicketImage ticketImage : ticketImages) {
-      imageURLS.add(ticketImage.getImageURL());
-    }
-    return imageURLS;
-  }
-
-  public static TOSpecificAsset getSpecificAssetFromTicket(TOMaintenanceTicket ticket) {
-    MaintenanceTicket maintenanceTicket = MaintenanceTicket.getWithId(ticket.getId());
-    if (maintenanceTicket.getAsset() != null) {
-      SpecificAsset asset = maintenanceTicket.getAsset();
-
-      TOAssetType assetType = new TOAssetType(asset.getAssetType().getName(), asset.getAssetType().getExpectedLifeSpan());
-      if (asset.getAssetType().getImage() != null && !asset.getAssetType().getImage().isEmpty())
-        assetType.setImageURL(asset.getAssetType().getImage());
-        
-      TOSpecificAsset toAsset = new TOSpecificAsset(asset.getAssetNumber(), asset.getFloorNumber(), asset.getRoomNumber(), asset.getPurchaseDate(), assetType);
-
-      return toAsset;
-    }
-    
-    return null;
-
   }
 }

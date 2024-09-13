@@ -5,24 +5,7 @@ class TOMaintenanceTicket {
   Integer id;
   Date raisedOnDate;
   String description;
-  String raisedByEmail;
 
-  String status;
-
-  // the following three attributes are set to null if no one has been assigned yet to fix the ticket
-  String fixedByEmail;
-  String timeToResolve;
-  String priority;
-  Boolean approvalRequired;
-
-  // the following five attributes are set to null (String/Date) / -1 (Integer) if no asset is specified for the ticket
-  String assetName;
-  Integer expectLifeSpanInDays;
-  Date purchaseDate;
-  Integer floorNumber;
-  Integer roomNumber;
-
-  List<String> imageURLs;
   0..1 -> * TOMaintenanceNote notes;
 }
 
@@ -30,66 +13,4 @@ class TOMaintenanceNote {
   immutable;
   Date date;
   String description;
-  String noteTakerEmail;
-}
-
-class TOUser {
-  depend java.util.*;
-
-  abstract;
-  immutable;
-  String email;
-  String name;
-  String password;
-  String phoneNumber;
-  List<Integer> ticketsRaised;
-}
-
-class TOGuest {
-  depend java.util.*;
-
-  immutable;
-  isA TOUser;
-}
-
-class TOHotelStaff {
-  depend java.util.*;
-
-  abstract;
-  immutable;
-  isA TOUser;
-  List<Integer> ticketFixed;
-}
-
-class TOEmployee {
-  depend java.util.*;
-
-  immutable;
-  isA TOHotelStaff;
-}
-
-class TOManager {
-  depend java.util.*;
-
-  immutable;
-  isA TOHotelStaff;
-  List<Integer> ticketApproved;
-}
-
-class TOSpecificAsset {
-  depend ca.mcgill.ecse.assetplus.model.AssetType;
-
-  immutable
-  int assetNumber;
-  int floorNumber;
-  int roomNumber;
-  Date purchaseDate;
-  TOAssetType assetType;
-}
-
-class TOAssetType {
-  String name;
-  Integer expectedLifeSpan;
-  1 -> * TOSpecificAsset;
-  lazy String imageURL;
 }

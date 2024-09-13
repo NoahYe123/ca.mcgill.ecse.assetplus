@@ -3,8 +3,6 @@ package ca.mcgill.ecse.assetplus.controller;
 import java.sql.Date;
 import ca.mcgill.ecse.assetplus.application.AssetPlusApplication;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
-import ca.mcgill.ecse.assetplus.model.SpecificAsset;
-import ca.mcgill.ecse.assetplus.model.User;
 import ca.mcgill.ecse.assetplus.persistence.AssetPlusPersistence;
 
 /**
@@ -30,26 +28,14 @@ public class AssetPlusFeatureSet4Controller {
      //Input Validation 
     String err = AssetPlusFeatureUtility.isGreaterThanOrEqualToZero(id, "Ticket id") + 
     isNotExistingTicket(id) + AssetPlusFeatureUtility.isDescriptionEmpty(description) + 
-    AssetPlusFeatureUtility.isStringValid(email, "Email", "cannot") + 
-    AssetPlusFeatureUtility.isExistingUser(email, "ticket raiser") + 
-    isValidAssetNumberForTicket(assetNumber);
-  
+    AssetPlusFeatureUtility.isStringValid(email, "Email", "cannot");
     if (!err.isEmpty()){
         return err;
     }
 
     //Add the specific ticket to the AssetPlus application instance.
     try {
-        MaintenanceTicket newTicket = AssetPlusApplication.getAssetPlus().addMaintenanceTicket(id, raisedOnDate, description, User.getWithEmail(email));
-        
-        if (assetNumber != -1) {
-          SpecificAsset asset = SpecificAsset.getWithAssetNumber(assetNumber);
-          newTicket.setAsset(asset);
-        }
-        //if no asset associated to the ticket
-        else {
-          newTicket.setAsset(null);
-        }
+        MaintenanceTicket newTicket = AssetPlusApplication.getAssetPlus().addMaintenanceTicket(id, raisedOnDate, description);
         AssetPlusApplication.getAssetPlus().addMaintenanceTicket(newTicket);
       
     }
@@ -77,9 +63,7 @@ public class AssetPlusFeatureSet4Controller {
     String err = AssetPlusFeatureUtility.isGreaterThanOrEqualToZero(id, "Ticket id") + 
     AssetPlusFeatureUtility.isDescriptionEmpty(newDescription) + 
     AssetPlusFeatureUtility.isExistingTicket(id) +
-    AssetPlusFeatureUtility.isStringValid(newEmail, "Email", "cannot") + 
-    AssetPlusFeatureUtility.isExistingUser(newEmail, "ticket raiser") + 
-    isValidAssetNumberForTicket(newAssetNumber);
+    AssetPlusFeatureUtility.isStringValid(newEmail, "Email", "cannot");
   
     
     if (!err.isEmpty()){
@@ -91,14 +75,6 @@ public class AssetPlusFeatureSet4Controller {
         MaintenanceTicket currentTicket = MaintenanceTicket.getWithId(id);
         currentTicket.setRaisedOnDate(newRaisedOnDate);
         currentTicket.setDescription(newDescription);
-        currentTicket.setTicketRaiser( User.getWithEmail(newEmail));
-        if (newAssetNumber != -1){
-          SpecificAsset asset = SpecificAsset.getWithAssetNumber(newAssetNumber);
-          currentTicket.setAsset(asset);
-        }
-        else {
-          currentTicket.setAsset(null);
-        }
     } catch (RuntimeException e){
         return e.getMessage();
     }
@@ -123,20 +99,6 @@ public class AssetPlusFeatureSet4Controller {
     //Delete the specific ticket from the AssetPlus application instance. 
     MaintenanceTicket.getWithId(id).delete();
     return;
-  }
-
-
-  /**
-   * <p>Check if the input number is a valid asset number to input in a ticket and returns an empty string if it is.</p>
-   * @param assetNumber the number associated to an asset and can be -1 if there is not asset associated to the ticket
-   * @return an empty string or an error message
-   */
-  private static String isValidAssetNumberForTicket(int assetNumber){
-    if ((SpecificAsset.getWithAssetNumber(assetNumber) != null) || (assetNumber == -1)){
-      return "";
-    } else {
-      return "The asset does not exist";
-    }
   }
 
   /**

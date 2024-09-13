@@ -1,11 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+/*This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!*/
 
 package ca.mcgill.ecse.assetplus.controller;
 import java.sql.Date;
 import java.util.*;
 
-// line 3 "../../../../../../AssetPlusTransferObjects.ump"
+// line 3 "../../../../../AssetPlusTransferObjects.ump"
 public class TOMaintenanceTicket
 {
 
@@ -17,18 +17,6 @@ public class TOMaintenanceTicket
   private int id;
   private Date raisedOnDate;
   private String description;
-  private String raisedByEmail;
-  private String status;
-  private String fixedByEmail;
-  private String timeToResolve;
-  private String priority;
-  private boolean approvalRequired;
-  private String assetName;
-  private int expectLifeSpanInDays;
-  private Date purchaseDate;
-  private int floorNumber;
-  private int roomNumber;
-  private List<String> imageURLs;
 
   //TOMaintenanceTicket Associations
   private List<TOMaintenanceNote> notes;
@@ -40,23 +28,11 @@ public class TOMaintenanceTicket
   // CONSTRUCTOR
   //------------------------
 
-  public TOMaintenanceTicket(int aId, Date aRaisedOnDate, String aDescription, String aRaisedByEmail, String aStatus, String aFixedByEmail, String aTimeToResolve, String aPriority, boolean aApprovalRequired, String aAssetName, int aExpectLifeSpanInDays, Date aPurchaseDate, int aFloorNumber, int aRoomNumber, List<String> aImageURLs, TOMaintenanceNote... allNotes)
+  public TOMaintenanceTicket(int aId, Date aRaisedOnDate, String aDescription, TOMaintenanceNote... allNotes)
   {
     id = aId;
     raisedOnDate = aRaisedOnDate;
     description = aDescription;
-    raisedByEmail = aRaisedByEmail;
-    status = aStatus;
-    fixedByEmail = aFixedByEmail;
-    timeToResolve = aTimeToResolve;
-    priority = aPriority;
-    approvalRequired = aApprovalRequired;
-    assetName = aAssetName;
-    expectLifeSpanInDays = aExpectLifeSpanInDays;
-    purchaseDate = aPurchaseDate;
-    floorNumber = aFloorNumber;
-    roomNumber = aRoomNumber;
-    imageURLs = aImageURLs;
     canSetNotes = true;
     notes = new ArrayList<TOMaintenanceNote>();
     boolean didAddNotes = setNotes(allNotes);
@@ -83,77 +59,6 @@ public class TOMaintenanceTicket
   public String getDescription()
   {
     return description;
-  }
-
-  public String getRaisedByEmail()
-  {
-    return raisedByEmail;
-  }
-
-  public String getStatus()
-  {
-    return status;
-  }
-
-  /**
-   * the following three attributes are set to null if no one has been assigned yet to fix the ticket
-   */
-  public String getFixedByEmail()
-  {
-    return fixedByEmail;
-  }
-
-  public String getTimeToResolve()
-  {
-    return timeToResolve;
-  }
-
-  public String getPriority()
-  {
-    return priority;
-  }
-
-  public boolean getApprovalRequired()
-  {
-    return approvalRequired;
-  }
-
-  /**
-   * the following five attributes are set to null (String/Date) / -1 (Integer) if no asset is specified for the ticket
-   */
-  public String getAssetName()
-  {
-    return assetName;
-  }
-
-  public int getExpectLifeSpanInDays()
-  {
-    return expectLifeSpanInDays;
-  }
-
-  public Date getPurchaseDate()
-  {
-    return purchaseDate;
-  }
-
-  public int getFloorNumber()
-  {
-    return floorNumber;
-  }
-
-  public int getRoomNumber()
-  {
-    return roomNumber;
-  }
-
-  public List<String> getImageURLs()
-  {
-    return imageURLs;
-  }
-  /* Code from template attribute_IsBoolean */
-  public boolean isApprovalRequired()
-  {
-    return approvalRequired;
   }
   /* Code from template association_GetMany */
   public TOMaintenanceNote getNote(int index)
@@ -225,19 +130,7 @@ public class TOMaintenanceTicket
   {
     return super.toString() + "["+
             "id" + ":" + getId()+ "," +
-            "description" + ":" + getDescription()+ "," +
-            "raisedByEmail" + ":" + getRaisedByEmail()+ "," +
-            "status" + ":" + getStatus()+ "," +
-            "fixedByEmail" + ":" + getFixedByEmail()+ "," +
-            "timeToResolve" + ":" + getTimeToResolve()+ "," +
-            "priority" + ":" + getPriority()+ "," +
-            "approvalRequired" + ":" + getApprovalRequired()+ "," +
-            "assetName" + ":" + getAssetName()+ "," +
-            "expectLifeSpanInDays" + ":" + getExpectLifeSpanInDays()+ "," +
-            "floorNumber" + ":" + getFloorNumber()+ "," +
-            "roomNumber" + ":" + getRoomNumber()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "raisedOnDate" + "=" + (getRaisedOnDate() != null ? !getRaisedOnDate().equals(this)  ? getRaisedOnDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "purchaseDate" + "=" + (getPurchaseDate() != null ? !getPurchaseDate().equals(this)  ? getPurchaseDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "imageURLs" + "=" + (getImageURLs() != null ? !getImageURLs().equals(this)  ? getImageURLs().toString().replaceAll("  ","    ") : "this" : "null");
+            "description" + ":" + getDescription()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "raisedOnDate" + "=" + (getRaisedOnDate() != null ? !getRaisedOnDate().equals(this)  ? getRaisedOnDate().toString().replaceAll("  ","    ") : "this" : "null");
   }
 }

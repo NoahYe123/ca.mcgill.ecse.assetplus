@@ -1,8 +1,5 @@
 package ca.mcgill.ecse.assetplus.controller;
 
-import ca.mcgill.ecse.assetplus.model.AssetType;
-import ca.mcgill.ecse.assetplus.model.SpecificAsset;
-import ca.mcgill.ecse.assetplus.model.User;
 import ca.mcgill.ecse.assetplus.model.MaintenanceTicket;
 
 /**
@@ -46,64 +43,6 @@ public class AssetPlusFeatureUtility {
     return "";
   }
 
-  /**
-   * <p>Check if the input string is an existing asset type and returns an empty string if it is.</p>
-   * 
-   * @param name the asset type name to check if it is an existing asset type
-   * @return an empty string or an error message
-   */
-  public static String isExistingAssetType(String name) {
-    String err = "";
-    AssetType type = AssetType.getWithName(name);
-    if (type == null) {
-      err = "The asset type does not exist";
-    }
-    return err;
-  }
-
-  /**
-   * <p>Check if the input number is an existing asset number and returns an empty string if it is.</p>
-   * 
-   * @param assetNumber the asset number to check if it is an existing asset
-   * @return an empty string or an error message
-   */
-  public static String isExistingAsset(int assetNumber) {
-    if (SpecificAsset.getWithAssetNumber(assetNumber) != null) {
-      return "";
-    } else {
-      return "Error: there is no specific asset with that assetNumber.\n";
-    }
-  }
-
-  /**
-   * <p>Check if the input email is an existing user and returns an empty string if it is.</p>
-   * 
-   * @param email the email is associated to a user
-   * @param subject a parameter to specify the error message
-   * @return an empty string or an error message
-   */
-  public static String isExistingUser(String email, String subject) {
-
-    String error = "";
-
-    if (email.equals("manager@ap.com")){
-         return "";
-    }
-    if (!User.hasWithEmail(email)) {
-      switch (subject) {
-        case "hotel staff":
-          error = "Hotel staff does not exist";
-          break;
-        case "ticket raiser":
-          error = "The ticket raiser does not exist";
-          break;
-        default:
-          error = "Error: user not found";
-      }
-    }
-    
-    return error;
-  }
 
   /**
    * <p>Check if the input id is an existing maintenance ticket and returns an empty string if it is.</p>

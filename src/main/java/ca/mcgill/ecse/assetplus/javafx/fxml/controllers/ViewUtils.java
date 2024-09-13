@@ -71,28 +71,6 @@ public class ViewUtils {
     return FXCollections.observableList(ticket);
   }
 
-  public static ObservableList<TOAssetType> getAssetTypes() {
-    List<TOAssetType> assetType = AssetPlusFeatureTOController.getAssetTypes();
-    // as javafx works with observable list, we need to convert the java.util.List to
-    // javafx.collections.observableList
-    return FXCollections.observableList(assetType);
-  }
-
-   public static ObservableList<TOSpecificAsset> getSpecificAsset() {
-    List<TOSpecificAsset> asset = AssetPlusFeatureTOController.getSpecificAssets();
-    // as javafx works with observable list, we need to convert the java.util.List to
-    // javafx.collections.observableList
-    return FXCollections.observableList(asset);
-  }
-
-  public static ObservableList<String> getTicketImages(int id) {
-    TOMaintenanceTicket ticket = AssetPlusFeatureSet6Controller.getTicket(id);
-
-    if (ticket==null) {
-      return null;
-    } 
-    return FXCollections.observableList(ticket.getImageURLs());
-  }
 
   public static ObservableList<TOMaintenanceNote> getTicketNotes(int id) {
     TOMaintenanceTicket ticket = AssetPlusFeatureSet6Controller.getTicket(id);
@@ -102,88 +80,16 @@ public class ViewUtils {
     }
     return FXCollections.observableList(ticket.getNotes());
   }
-
-  public static List<TOHotelStaff> getHotelStaffs() {
-    return AssetPlusFeatureSet1Controller.getHotelStaffs();
-  }
-
-  public static void startWork(int ticketId) {
-    AssetPlusFeatureMaintenanceTicketController.startWorkingOnTicket(ticketId);
-  }
-
-  public static void completeWork(int ticketId) {
-    AssetPlusFeatureMaintenanceTicketController.completeTicket(ticketId);
-  }
-
-  public static void approveTicket(int ticketId) {
-    AssetPlusFeatureMaintenanceTicketController.approveTicket(ticketId);
-  }
-
-  public static void disapproveTicket(int ticketId, Date date, String reason) {
-    AssetPlusFeatureMaintenanceTicketController.disapproveTicket(ticketId, date, reason);
-  }
-
+  
   public static TOMaintenanceTicket getTicket(int ticketId) {
-    return AssetPlusFeatureSet6Controller.getTicket(ticketId);
+	    return AssetPlusFeatureSet6Controller.getTicket(ticketId);
   }
 
-  public static TOAssetType getWithAssetName(String name){
-  List<TOAssetType> list = getAssetTypes();
-        for (TOAssetType type : list){
-            if (type.getName().equals(name)){
-              return type;
-            }
-        }
-        return null;
-  }
-
-  public static int getSpecificAssetFromTicket(TOMaintenanceTicket ticket) {
-    TOSpecificAsset asset = AssetPlusFeatureSet6Controller.getSpecificAssetFromTicket(ticket);
-    if (asset != null) {
-      return asset.getAssetNumber();
-    }
-    return -1;
-  }
-
-  public static List<Integer> getTicketsFromAssetType(String assetType) {
-    List<Integer> ticketIds = new ArrayList<>();
-    for (TOMaintenanceTicket ticket: AssetPlusFeatureSet6Controller.getTickets()) {
-      String assetName = ticket.getAssetName();
-      if (assetName != null && assetName.equals(assetType)) {
-        ticketIds.add(ticket.getId());
-      }
-    }
-    return ticketIds;
-  }
-
-  public static List<Integer> getTicketsFromEmployee(String email) {
-    List<Integer> ticketIds = new ArrayList<>();
-    for (TOMaintenanceTicket ticket: AssetPlusFeatureSet6Controller.getTickets()) {
-      String employeeEmail = ticket.getRaisedByEmail();
-      if (employeeEmail != null && employeeEmail.equals(email)) {
-        ticketIds.add(ticket.getId());
-      }
-    }
-    return ticketIds;
-  }
 
   public static void deleteTicketsWithIds(List<Integer> ticketIds) {
     for (int id: ticketIds) {
       AssetPlusFeatureSet4Controller.deleteMaintenanceTicket(id);
     }
-  }
-  
-  public static int getNumberOfTickets(String statusOrPriority) {
-    int count = 0;
-    List<TOMaintenanceTicket> tickets = AssetPlusFeatureSet6Controller.getTickets();
-
-    for (TOMaintenanceTicket ticket: tickets) {
-      if (ticket.getStatus().toString().equals(statusOrPriority) || ticket.getPriority().equals(statusOrPriority)) {
-        count++;
-      }
-    }
-    
-    return count;
   }
   
 }

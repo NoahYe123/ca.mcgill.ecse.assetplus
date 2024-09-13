@@ -1,10 +1,10 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+/*This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!*/
 
 package ca.mcgill.ecse.assetplus.controller;
 import java.sql.Date;
 
-// line 29 "../../../../../../AssetPlusTransferObjects.ump"
+// line 12 "../../../../../AssetPlusTransferObjects.ump"
 public class TOMaintenanceNote
 {
 
@@ -15,17 +15,15 @@ public class TOMaintenanceNote
   //TOMaintenanceNote Attributes
   private Date date;
   private String description;
-  private String noteTakerEmail;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public TOMaintenanceNote(Date aDate, String aDescription, String aNoteTakerEmail)
+  public TOMaintenanceNote(Date aDate, String aDescription)
   {
     date = aDate;
     description = aDescription;
-    noteTakerEmail = aNoteTakerEmail;
   }
 
   //------------------------
@@ -42,11 +40,6 @@ public class TOMaintenanceNote
     return description;
   }
 
-  public String getNoteTakerEmail()
-  {
-    return noteTakerEmail;
-  }
-
   public void delete()
   {}
 
@@ -54,8 +47,7 @@ public class TOMaintenanceNote
   public String toString()
   {
     return super.toString() + "["+
-            "description" + ":" + getDescription()+ "," +
-            "noteTakerEmail" + ":" + getNoteTakerEmail()+ "]" + System.getProperties().getProperty("line.separator") +
+            "description" + ":" + getDescription()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null");
   }
 }

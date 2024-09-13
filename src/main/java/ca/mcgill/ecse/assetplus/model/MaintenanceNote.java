@@ -1,48 +1,73 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
+/*This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!*/
 
 package ca.mcgill.ecse.assetplus.model;
+import java.util.*;
 import java.sql.Date;
 
-// line 61 "../../../../../../AssetPlus.ump"
+// line 20 "../../../../../AssetPlus.ump"
 public class MaintenanceNote
 {
+
+  //------------------------
+  // STATIC VARIABLES
+  //------------------------
+
+  private static Map<Integer, MaintenanceNote> maintenancenotesById = new HashMap<Integer, MaintenanceNote>();
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
   //MaintenanceNote Attributes
+  private int id;
   private Date date;
   private String description;
 
   //MaintenanceNote Associations
   private MaintenanceTicket ticket;
-  private HotelStaff noteTaker;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public MaintenanceNote(Date aDate, String aDescription, MaintenanceTicket aTicket, HotelStaff aNoteTaker)
+  public MaintenanceNote(int aId, Date aDate, String aDescription, MaintenanceTicket aTicket)
   {
     date = aDate;
     description = aDescription;
+    if (!setId(aId))
+    {
+      throw new RuntimeException("Cannot create due to duplicate id. See http://manual.umple.org?RE003ViolationofUniqueness.html");
+    }
     boolean didAddTicket = setTicket(aTicket);
     if (!didAddTicket)
     {
       throw new RuntimeException("Unable to create ticketNote due to ticket. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
-    boolean didAddNoteTaker = setNoteTaker(aNoteTaker);
-    if (!didAddNoteTaker)
-    {
-      throw new RuntimeException("Unable to create maintenanceNote due to noteTaker. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
 
   //------------------------
   // INTERFACE
   //------------------------
+
+  public boolean setId(int aId)
+  {
+    boolean wasSet = false;
+    Integer anOldId = getId();
+    if (anOldId != null && anOldId.equals(aId)) {
+      return true;
+    }
+    if (hasWithId(aId)) {
+      return wasSet;
+    }
+    id = aId;
+    wasSet = true;
+    if (anOldId != null) {
+      maintenancenotesById.remove(anOldId);
+    }
+    maintenancenotesById.put(aId, this);
+    return wasSet;
+  }
 
   public boolean setDate(Date aDate)
   {
@@ -60,6 +85,21 @@ public class MaintenanceNote
     return wasSet;
   }
 
+  public int getId()
+  {
+    return id;
+  }
+  /* Code from template attribute_GetUnique */
+  public static MaintenanceNote getWithId(int aId)
+  {
+    return maintenancenotesById.get(aId);
+  }
+  /* Code from template attribute_HasUnique */
+  public static boolean hasWithId(int aId)
+  {
+    return getWithId(aId) != null;
+  }
+
   public Date getDate()
   {
     return date;
@@ -73,11 +113,6 @@ public class MaintenanceNote
   public MaintenanceTicket getTicket()
   {
     return ticket;
-  }
-  /* Code from template association_GetOne */
-  public HotelStaff getNoteTaker()
-  {
-    return noteTaker;
   }
   /* Code from template association_SetOneToMany */
   public boolean setTicket(MaintenanceTicket aTicket)
@@ -98,39 +133,15 @@ public class MaintenanceNote
     wasSet = true;
     return wasSet;
   }
-  /* Code from template association_SetOneToMany */
-  public boolean setNoteTaker(HotelStaff aNoteTaker)
-  {
-    boolean wasSet = false;
-    if (aNoteTaker == null)
-    {
-      return wasSet;
-    }
-
-    HotelStaff existingNoteTaker = noteTaker;
-    noteTaker = aNoteTaker;
-    if (existingNoteTaker != null && !existingNoteTaker.equals(aNoteTaker))
-    {
-      existingNoteTaker.removeMaintenanceNote(this);
-    }
-    noteTaker.addMaintenanceNote(this);
-    wasSet = true;
-    return wasSet;
-  }
 
   public void delete()
   {
+    maintenancenotesById.remove(getId());
     MaintenanceTicket placeholderTicket = ticket;
     this.ticket = null;
     if(placeholderTicket != null)
     {
       placeholderTicket.removeTicketNote(this);
-    }
-    HotelStaff placeholderNoteTaker = noteTaker;
-    this.noteTaker = null;
-    if(placeholderNoteTaker != null)
-    {
-      placeholderNoteTaker.removeMaintenanceNote(this);
     }
   }
 
@@ -138,9 +149,9 @@ public class MaintenanceNote
   public String toString()
   {
     return super.toString() + "["+
+            "id" + ":" + getId()+ "," +
             "description" + ":" + getDescription()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "ticket = "+(getTicket()!=null?Integer.toHexString(System.identityHashCode(getTicket())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "noteTaker = "+(getNoteTaker()!=null?Integer.toHexString(System.identityHashCode(getNoteTaker())):"null");
+            "  " + "ticket = "+(getTicket()!=null?Integer.toHexString(System.identityHashCode(getTicket())):"null");
   }
 }

@@ -1,9 +1,6 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 
 import java.util.ResourceBundle;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet1Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureTOController;
-import ca.mcgill.ecse.assetplus.controller.TOManager;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,9 +55,6 @@ public class SettingsController {
         } else if (language.equals("fr")) {
             frRadioButton.setSelected(true);
         }
-
-        TOManager toManager = AssetPlusFeatureTOController.convertFromManager();
-        updateManagerPasswordField.setText(toManager.getPassword());
     }
 
     @FXML
@@ -70,18 +64,6 @@ public class SettingsController {
         if (selectedButton != null) {
             String language = selectedButton.getText().toLowerCase().substring(0, 2);
             AssetPlusFXMLView.getInstance().setLanguage(language);
-        }
-    }
-
-    @FXML
-    void updateManagerPassword(ActionEvent event) {
-        String err = AssetPlusFeatureSet1Controller.updateManager(updateManagerPasswordField.getText());
-        if (err.isEmpty()) {
-            updateManagerPasswordError.setText("");
-            updateManagerPasswordSuccess.setText(resources.getString("key.PasswordChangedSuccesfuly"));
-        } else {
-            updateManagerPasswordError.setText(translateErrorMessage(err));
-            updateManagerPasswordSuccess.setText("");
         }
     }
 
