@@ -58,7 +58,7 @@ public class AddTicketPopUpController {
     void initialize(){
 
         ticketNumberField.setEditable(false);
-        ticketNumberField.setText((AssetPlusFeatureSet6Controller.getTickets().get(AssetPlusFeatureSet6Controller.getTickets().size()-1).getId()+1)+"");
+//        ticketNumberField.setText((AssetPlusFeatureSet6Controller.getTickets().get(AssetPlusFeatureSet6Controller.getTickets().size()-1).getId()+1)+"");
         ticketNumberField.setFocusTraversable(false);
         ticketStatusField.setEditable(false);
         ticketStatusField.setFocusTraversable(false);

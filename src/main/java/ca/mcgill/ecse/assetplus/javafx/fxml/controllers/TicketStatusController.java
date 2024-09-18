@@ -137,11 +137,11 @@ public class TicketStatusController {
     
     @FXML
     void initialize() {
-        raiserSearch.setOnKeyReleased(event -> performSearch());
-        ticketSearch.setOnKeyReleased(event -> performSearch());
-        dateSearch.setOnAction(event -> performSearch());
-        assetNumberSearch.setOnKeyReleased(event -> performSearch());
-        statusChoiceBox.setOnAction(event -> performSearch());
+ 
+
+//        dateSearch.setOnAction(event -> performSearch());
+//        assetNumberSearch.setOnKeyReleased(event -> performSearch());
+//        statusChoiceBox.setOnAction(event -> performSearch());
         
         resources = AssetPlusFXMLView.getInstance().getBundle();
 
@@ -159,16 +159,16 @@ public class TicketStatusController {
             EmployeeDeletedEvent.EMPLOYEE_DELETED,
             e -> handleDeleted(((EmployeeDeletedEvent) e).getTicketsToDelete()));
 
-        statusChoiceBox.getItems().addAll(
-            resources.getString("key.TicketStatus_Open"),
-            resources.getString("key.TicketStatus_Assigned"),
-            resources.getString("key.TicketStatus_InProgress"),
-            resources.getString("key.TicketStatus_Resolved"),
-            resources.getString("key.TicketStatus_Closed"),
-            resources.getString("key.ShowAll")
-        );
+//        statusChoiceBox.getItems().addAll(
+//            resources.getString("key.TicketStatus_Open"),
+//            resources.getString("key.TicketStatus_Assigned"),
+//            resources.getString("key.TicketStatus_InProgress"),
+//            resources.getString("key.TicketStatus_Resolved"),
+//            resources.getString("key.TicketStatus_Closed"),
+//            resources.getString("key.ShowAll")
+//        );
 
-        statusChoiceBox.setValue(resources.getString("key.ShowAll"));
+
     }
 
     @FXML

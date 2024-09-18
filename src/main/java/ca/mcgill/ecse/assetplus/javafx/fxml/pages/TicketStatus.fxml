@@ -73,33 +73,8 @@
                                     <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="29.200637817382812" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="30.799362182617188" minHeight="10.0" prefHeight="30.799362182617188" vgrow="SOMETIMES" />
                                  </rowConstraints>
-                                 <children>
-                                    <Label alignment="CENTER" text="%key.TicketStatus_TicketNumber" GridPane.hgrow="ALWAYS" />
-                                    <Label text="%key.TicketStatus_RaiserSearch" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
-                                    <TextField fx:id="ticketSearch" GridPane.columnIndex="1" />
-                                    <TextField fx:id="raiserSearch" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label layoutX="145.0" layoutY="48.0" text="%key.TicketStatus_DateRaised" GridPane.columnIndex="2">
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label layoutX="245.0" layoutY="17.0" text="%key.TicketStatus_Status" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <DatePicker fx:id="dateSearch" prefHeight="28.0" prefWidth="139.0" GridPane.columnIndex="3" />
-                                    <ChoiceBox fx:id="statusChoiceBox" prefHeight="28.0" prefWidth="135.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                    <Label text="Asset Number" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets left="5.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <TextField fx:id="assetNumberSearch" prefHeight="23.0" prefWidth="121.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets right="70.0" />
-                                       </GridPane.margin>
-                                    </TextField>
+                                 <children>                                                                                                                        
+                    
                                  </children>
                                  <HBox.margin>
                                     <Insets left="10.0" />
