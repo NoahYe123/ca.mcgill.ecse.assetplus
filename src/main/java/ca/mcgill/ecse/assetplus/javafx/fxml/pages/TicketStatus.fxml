@@ -73,8 +73,17 @@
                                     <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="29.200637817382812" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="30.799362182617188" minHeight="10.0" prefHeight="30.799362182617188" vgrow="SOMETIMES" />
                                  </rowConstraints>
-                                 <children>                                                                                                                        
-                    
+                                 <children>
+                                
+                                    <Label layoutX="145.0" layoutY="48.0" text="%key.TicketStatus_DateRaised" GridPane.columnIndex="2">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </Label>
+                                 
+                                    <DatePicker fx:id="dateSearch" prefHeight="28.0" prefWidth="139.0" GridPane.columnIndex="3" />
+                                  
+                                  
                                  </children>
                                  <HBox.margin>
                                     <Insets left="10.0" />
@@ -100,12 +109,7 @@
                         <TableView id="ticketTable" fx:id="ticketTable" prefWidth="750.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                           <columns>
                               <TableColumn fx:id="ticketNumberColumn" maxWidth="250.0" prefWidth="100.0" text="%key.TicketStatus_TicketNumber" />
-                              <TableColumn fx:id="assetNumberColumn" maxWidth="250.0" prefWidth="130.0" text="%key.AssetMenu_AssetNumber" />
-                              <TableColumn fx:id="assetColumn" maxWidth="150.0" prefWidth="130.0" text="%key.TicketStatus_Asset" />
-                              <TableColumn fx:id="reporterColumn" maxWidth="200.0" prefWidth="200.0" text="%key.TicketStatus_Raiser" />
-                              <TableColumn fx:id="assigneeColumn" maxWidth="200.0" prefWidth="200.0" text="%key.TicketStatus_Assignee" />
                               <TableColumn fx:id="dateStartedColumn" maxWidth="280.0" prefWidth="200.0" text="%key.TicketStatus_DateRaised" />
-                              <TableColumn fx:id="statusColumn" maxWidth="300.0" prefWidth="200.0" style="-fx-padding: 0 0 0 0;" text="%key.TicketStatus_Status" />
                               <TableColumn fx:id="actionColumn" maxWidth="350.0" prefWidth="250.0" text="Action" />
                           </columns>
                           <columnResizePolicy>
