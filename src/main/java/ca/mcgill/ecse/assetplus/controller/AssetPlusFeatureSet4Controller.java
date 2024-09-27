@@ -27,9 +27,10 @@ public class AssetPlusFeatureSet4Controller {
       String email, int assetNumber) {
      //Input Validation 
     String err = AssetPlusFeatureUtility.isGreaterThanOrEqualToZero(id, "Ticket id") + 
-    isNotExistingTicket(id) + AssetPlusFeatureUtility.isDescriptionEmpty(description) + 
+    isNotExistingTicket(id) + AssetPlusFeatureUtility.isDescriptionEmpty(description);
     AssetPlusFeatureUtility.isStringValid(email, "Email", "cannot");
     if (!err.isEmpty()){
+    	System.out.print("err "+ err); // leave this here to see what the error is
         return err;
     }
 

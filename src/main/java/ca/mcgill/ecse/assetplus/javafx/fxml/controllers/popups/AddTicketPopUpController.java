@@ -1,5 +1,5 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups;
-
+import java.util.Random;
 import java.time.LocalDate;
 import java.sql.Date;
 import java.util.ResourceBundle;
@@ -51,6 +51,8 @@ public class AddTicketPopUpController {
 
     @FXML
     private TextField ticketStatusField;
+    
+    private Random random = new Random(); 
 
 
 
@@ -90,7 +92,9 @@ public class AddTicketPopUpController {
         else{
             int ticketNumber = 0;
             if (ticketNumberString != null) {
-                ticketNumber = Integer.parseInt(ticketNumberString);
+            	long timestamp = System.currentTimeMillis();  // Current time in milliseconds
+            	int randomNumber = random.nextInt(999);       // Random number between 0 and 999
+                ticketNumber = (int) (timestamp + randomNumber);
             }
             String err = AssetPlusFeatureSet4Controller.addMaintenanceTicket(ticketNumber, (java.sql.Date)raisedDate, description, raiser, assetNumber);
             ViewUtils.callController("");
@@ -104,6 +108,7 @@ public class AddTicketPopUpController {
                 AssetPlusFXMLView.getInstance().closePopUpWindow();    
             }
             else{
+            	System.out.print("here");
                 addTicketError.setText(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketMenu_ErrorMessage2"));
             }  
 
