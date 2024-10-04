@@ -1,4 +1,3 @@
-
 class AssetPlus {
   public void reinitialize() {
     MaintenanceTicket.reinitializeUniqueId(this.getMaintenanceTickets());

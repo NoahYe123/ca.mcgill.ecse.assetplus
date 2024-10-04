@@ -11,6 +11,7 @@ class TOMaintenanceTicket {
 
 class TOMaintenanceNote {
   immutable;
+  Integer id;
   Date date;
   String description;
 }

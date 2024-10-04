@@ -71,7 +71,7 @@ public class AssetPlusFeatureSet6Controller {
     List<TOMaintenanceNote> toMaintenanceNotes = new ArrayList<>();
 
     for (MaintenanceNote maintenanceNote : maintenanceNotes) {
-      TOMaintenanceNote toMaintenanceNote = new TOMaintenanceNote(maintenanceNote.getDate(),
+      TOMaintenanceNote toMaintenanceNote = new TOMaintenanceNote(maintenanceNote.getId(), maintenanceNote.getDate(),
           maintenanceNote.getDescription());
       toMaintenanceNotes.add(toMaintenanceNote);
     }

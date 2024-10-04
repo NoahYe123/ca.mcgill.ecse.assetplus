@@ -25,8 +25,6 @@ public class ModifyTicketPopUpController {
     private int ticketId;
 
     private static TOMaintenanceTicket ticket;
-
-
     
     @FXML
     private Button cancelButton;
@@ -39,33 +37,12 @@ public class ModifyTicketPopUpController {
     
     @FXML
     private Button modifyTicketButton;
-    
-    @FXML
-    private SVGPath pencilAsset;
-    
-    @FXML
-    private SVGPath pencilDate;
-    
-    @FXML
-    private SVGPath pencilDescription;
-    
-    @FXML
-    private SVGPath pencilEmail;
-    
-    @FXML
-    private SVGPath pencilType;
-    
+   
     @FXML
     private DatePicker raisedDateField;
     
     @FXML
-    private TextField raiserField;
-    
-    @FXML
     private TextField ticketNumberField;
-    
-    @FXML
-    private TextField ticketStatusField;
     
     @FXML
     private TextField typeField;
@@ -74,11 +51,7 @@ public class ModifyTicketPopUpController {
     private Label updateTicketError;
 
     @FXML
-    void initialize(){
-        ticketNumberField.setFocusTraversable(false);
-        ticketStatusField.setFocusTraversable(false);   
-  
-
+    void initialize(){ 
         updateTicketError.setText(null);
         
     }
@@ -92,25 +65,21 @@ public class ModifyTicketPopUpController {
     void updateTicketClicked(ActionEvent event) {
         String ticketNumberString = ticketNumberField.getText();
         String description = descriptionField.getText();
-        String raiser = raiserField.getText();
         LocalDate date = raisedDateField.getValue();
         Date raisedDate = Date.valueOf(date);
-        int assetNumber = -1;
       
 
-        if (description == null || description.trim().isEmpty() || raiser == null || raiser.trim().isEmpty()|| raisedDate == null || raisedDate == null){
+        if (description == null || description.trim().isEmpty() || raisedDate == null || raisedDate == null){
                 updateTicketError.setText(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketMenu_ErrorMessage1"));
         }
         else{
             int ticketNumber = Integer.parseInt(ticketNumberString);
-            String err = AssetPlusFeatureSet4Controller.updateMaintenanceTicket(ticketNumber, (java.sql.Date)raisedDate, description, raiser, assetNumber);
+            String err = AssetPlusFeatureSet4Controller.updateMaintenanceTicket(ticketNumber, (java.sql.Date)raisedDate, description);
             ViewUtils.callController("");   
             if (err == ""){
                 ticketNumberField.setText("");
                 descriptionField.setText("");
-                raiserField.setText("");
 
-                typeField.setText(null);
                 raisedDateField.setValue(null);
                 updateTicketError.setText(null);
                 AssetPlusFXMLView.getInstance().closePopUpWindow();    
@@ -126,10 +95,7 @@ public class ModifyTicketPopUpController {
         ticketId = id;
         // set editable to false so that the user cannot choose from the calendar
         raisedDateField.setEditable(false);
-        ticketStatusField.setEditable(false);
         ticketNumberField.setEditable(false);
-        typeField.setEditable(false);
-        typeField.setFocusTraversable(false);
         
         ticket = AssetPlusFeatureSet6Controller.getTicket(ticketId);
         
@@ -138,12 +104,5 @@ public class ModifyTicketPopUpController {
         raisedDateField.setValue(ticket.getRaisedOnDate().toLocalDate());
         
         updateTicketError.setText(null);
-
   }
-
-@FXML
-void handleSelection(ActionEvent event) {
-
-}
-
 }

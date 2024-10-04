@@ -32,8 +32,6 @@ public class AddTicketPopUpController {
     @FXML
     private Button addTicketButton;
 
-
-
     @FXML
     private TextArea descriptionField;
 
@@ -47,27 +45,9 @@ public class AddTicketPopUpController {
     private Label addTicketError;
 
     @FXML
-    private TextField ticketNumberField1;
-
-    @FXML
-    private TextField ticketStatusField;
-    
-    private Random random = new Random(); 
-
-
-
-    @FXML
     void initialize(){
 
-        ticketNumberField.setEditable(false);
-//        ticketNumberField.setText((AssetPlusFeatureSet6Controller.getTickets().get(AssetPlusFeatureSet6Controller.getTickets().size()-1).getId()+1)+"");
-        ticketNumberField.setFocusTraversable(false);
-        ticketStatusField.setEditable(false);
-        ticketStatusField.setFocusTraversable(false);
-  
-;
-        //get assets only for the selected type
-   
+        ticketNumberField.setEditable(true);
      
         // set editable to false so that the user cannot choose from the calendar
         raisedDateField.setEditable(false);
@@ -81,22 +61,14 @@ public class AddTicketPopUpController {
     void addTicketClicked(ActionEvent event) {
         String ticketNumberString = ticketNumberField.getText();
         String description = descriptionField.getText();
-        String raiser = raiserField.getText();
         LocalDate date = raisedDateField.getValue();
         Date raisedDate = Date.valueOf(date);
-        int assetNumber = -1;
        
-        if (description == null || description.trim().isEmpty() || raiser == null || raiser.trim().isEmpty()|| raisedDate == null || raisedDate == null){
+        if (description == null || description.trim().isEmpty() || raisedDate == null){
                 addTicketError.setText(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketMenu_ErrorMessage1"));
-        }
-        else{
-            int ticketNumber = 0;
-            if (ticketNumberString != null) {
-            	long timestamp = System.currentTimeMillis();  // Current time in milliseconds
-            	int randomNumber = random.nextInt(999);       // Random number between 0 and 999
-                ticketNumber = (int) (timestamp + randomNumber);
-            }
-            String err = AssetPlusFeatureSet4Controller.addMaintenanceTicket(ticketNumber, (java.sql.Date)raisedDate, description, raiser, assetNumber);
+        }else{
+            
+            String err = AssetPlusFeatureSet4Controller.addMaintenanceTicket(Integer.parseInt(ticketNumberString), (java.sql.Date)raisedDate, description);
             ViewUtils.callController("");
             if (err == ""){
                 ticketNumberField.setText("");
@@ -108,7 +80,6 @@ public class AddTicketPopUpController {
                 AssetPlusFXMLView.getInstance().closePopUpWindow();    
             }
             else{
-            	System.out.print("here");
                 addTicketError.setText(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketMenu_ErrorMessage2"));
             }  
 
@@ -118,11 +89,6 @@ public class AddTicketPopUpController {
     @FXML
     void cancelClicked(ActionEvent event) {
         AssetPlusFXMLView.getInstance().closePopUpWindow();
-    }
-
-    @FXML
-    void handleAssetNumberSelection(ActionEvent event) {
-
     }
 }
 

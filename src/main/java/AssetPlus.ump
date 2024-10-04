@@ -1,6 +1,6 @@
 namespace ca.mcgill.ecse.assetplus.model;
 
-use MaintenanceTicket.ump;
+use AssetPlusTransferObjects.ump;
 use AssetPlusPersistence.ump;
 
 class AssetPlus

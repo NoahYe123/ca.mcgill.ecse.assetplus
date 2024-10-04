@@ -23,12 +23,10 @@ public class AssetPlusFeatureSet4Controller {
    * @return an empty string or an error message
    */
   // assetNumber -1 means that no asset is specified
-  public static String addMaintenanceTicket(int id, Date raisedOnDate, String description,
-      String email, int assetNumber) {
+  public static String addMaintenanceTicket(int id, Date raisedOnDate, String description) {
      //Input Validation 
     String err = AssetPlusFeatureUtility.isGreaterThanOrEqualToZero(id, "Ticket id") + 
     isNotExistingTicket(id) + AssetPlusFeatureUtility.isDescriptionEmpty(description);
-    AssetPlusFeatureUtility.isStringValid(email, "Email", "cannot");
     if (!err.isEmpty()){
     	System.out.print("err "+ err); // leave this here to see what the error is
         return err;
@@ -57,14 +55,12 @@ public class AssetPlusFeatureSet4Controller {
    * @return an empty string or an error message
    */
   // newAssetNumber -1 means that no asset is specified
-  public static String updateMaintenanceTicket(int id, Date newRaisedOnDate, String newDescription,
-      String newEmail, int newAssetNumber) {
+  public static String updateMaintenanceTicket(int id, Date newRaisedOnDate, String newDescription) {
     //Input Validation
 
     String err = AssetPlusFeatureUtility.isGreaterThanOrEqualToZero(id, "Ticket id") + 
     AssetPlusFeatureUtility.isDescriptionEmpty(newDescription) + 
-    AssetPlusFeatureUtility.isExistingTicket(id) +
-    AssetPlusFeatureUtility.isStringValid(newEmail, "Email", "cannot");
+    AssetPlusFeatureUtility.isExistingTicket(id);
   
     
     if (!err.isEmpty()){
@@ -99,6 +95,7 @@ public class AssetPlusFeatureSet4Controller {
 
     //Delete the specific ticket from the AssetPlus application instance. 
     MaintenanceTicket.getWithId(id).delete();
+    AssetPlusPersistence.save();
     return;
   }
 
