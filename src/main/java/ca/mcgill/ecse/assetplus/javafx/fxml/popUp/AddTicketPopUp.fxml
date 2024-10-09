@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<VBox alignment="CENTER" prefHeight="478.0" prefWidth="608.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.AddTicketPopUpController">
+<VBox alignment="CENTER" prefHeight="478.0" prefWidth="608.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.AddMaintenanceTicketController">
    <children>
       <fx:include source="../components/PopUpToolBar.fxml" />
       <Label alignment="CENTER" layoutY="-10.0" styleClass="popUpTitle" text="%key.TicketMenu_AddTicket" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
