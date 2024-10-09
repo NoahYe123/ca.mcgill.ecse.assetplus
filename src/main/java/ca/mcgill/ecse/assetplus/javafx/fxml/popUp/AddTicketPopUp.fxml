@@ -26,14 +26,14 @@
                               <Rectangle fx:id="fieldBg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="19.0" layoutY="37.0" stroke="BLACK" strokeType="INSIDE" width="243.0" />
                               <Pane />
                               <Label layoutX="43.0" layoutY="51.0" text="%key.TicketMenu_TicketNumber" />
-                              <TextField fx:id="ticketNumberField" layoutX="151.0" layoutY="48.0" prefHeight="26.0" prefWidth="98.0" />
+                              <TextField fx:id="idField" layoutX="151.0" layoutY="48.0" prefHeight="26.0" prefWidth="98.0" />
                               <Rectangle fx:id="fieldBg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="124.0" layoutX="19.0" layoutY="176.0" stroke="BLACK" strokeType="INSIDE" width="243.0" />
                               <Label layoutX="43.0" layoutY="187.0" text="%key.TicketMenu_Description" />
-                              <Button fx:id="cancelButton" layoutX="100.0" layoutY="345.0" mnemonicParsing="false" onAction="#cancelClicked" prefHeight="31.0" prefWidth="127.0" text="%key.Cancel" />
+                              <Button fx:id="cancelMaintenanceTicketButton" layoutX="100.0" layoutY="345.0" mnemonicParsing="false" onAction="#cancelClicked" prefHeight="31.0" prefWidth="127.0" text="%key.Cancel" />
                               <Label layoutX="35.0" layoutY="185.0" prefHeight="6.0" prefWidth="3.0" text="*" textFill="#e81a1a" />
                               <TextArea fx:id="descriptionField" layoutX="33.0" layoutY="209.0" prefHeight="77.0" prefWidth="214.0" stylesheets="@../css/style.css" />
                               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="5.0" text="%key.TicketMenu_EnterAdd" textAlignment="CENTER" />
-                              <Label fx:id="addTicketError" alignment="BOTTOM_CENTER" layoutX="-14.0" layoutY="320.0" prefHeight="15.0" prefWidth="615.0" styleClass="errorMessage" text="label" textAlignment="CENTER" textFill="#0a0a0a" />
+                              <Label fx:id="addMaintenanceTicketError" alignment="BOTTOM_CENTER" layoutX="-14.0" layoutY="320.0" prefHeight="15.0" prefWidth="615.0" styleClass="errorMessage" text="label" textAlignment="CENTER" textFill="#0a0a0a" />
                            </children>
                         </Pane>
                      </children>
@@ -47,9 +47,8 @@
                        
                         <Rectangle fx:id="fieldBg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="28.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="243.0" />
                         <Label layoutX="47.0" layoutY="54.0" prefHeight="39.0" prefWidth="72.0" style="-fx-wrap-text: true;" text="%key.TicketMenu_AddRaisedDate" textAlignment="CENTER" />
-                        <DatePicker fx:id="raisedDateField" layoutX="138.0" layoutY="59.0" prefHeight="28.0" prefWidth="118.0" />
-                        <TextField fx:id="raiserField" layoutX="156.0" layoutY="259.0" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: white;" />
-                        <Button fx:id="addTicketButton" layoutX="70.0" layoutY="345.0" mnemonicParsing="false" onAction="#addTicketClicked" prefHeight="31.0" prefWidth="127.0" text="%key.TicketMenu_Create" />
+                        <DatePicker fx:id="raisedOnDateField" layoutX="138.0" layoutY="59.0" prefHeight="28.0" prefWidth="118.0" />
+                        <Button fx:id="addMaintenanceTicketButton" layoutX="70.0" layoutY="345.0" mnemonicParsing="false" onAction="#addMaintenanceTicketClicked" prefHeight="31.0" prefWidth="127.0" text="%key.TicketMenu_Create" />
 
        
 
