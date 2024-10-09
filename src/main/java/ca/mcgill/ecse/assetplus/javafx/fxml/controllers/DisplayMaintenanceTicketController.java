@@ -143,7 +143,7 @@ public class DisplayMaintenanceTicketController{
 				Button editBtn = new Button();
 				editBtn.getStyleClass().add("icon-edit");
 				editBtn.setPickOnBounds(true);
-//				editBtn.setOnAction(event -> handleEditButtonClicked(id));
+				editBtn.setOnAction(event -> handleEditButtonClicked(id));
 				setCursor(editBtn);
 				Tooltip editTooltip = new Tooltip(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketStatus_edit"));
 				editTooltip.setStyle("-fx-text-fill: #A30D11");
@@ -176,12 +176,12 @@ public class DisplayMaintenanceTicketController{
 //	     controller.setTicketId(ticketId);
 //	}
 //	
-//	private void handleEditButtonClicked(int maintenanceTicketId) {
-//	    UpdateMaintenanceTicketFXController controller = (UpdateMaintenanceTicketFXController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ModifyMaintenanceTicketPopUp.fxml", "Update MaintenanceTicket");
-//	    if (controller==null) System.out.println("controller null");
-//	    controller.setMaintenanceTicketId(maintenanceTicketId);
-//	
-//	}
+	private void handleEditButtonClicked(int maintenanceTicketId) {
+		ModifyTicketPopUpController controller = (ModifyTicketPopUpController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ModifyTicketPopUp.fxml", "Update MaintenanceTicket");
+	    if (controller==null) System.out.println("controller null");
+	    controller.setTicketId(maintenanceTicketId);
+	
+	}
 //	
 //	private void handleTrashButtonClicked(int maintenanceTicketId) {
 //	    RemoveMaintenanceTicketFXController.setId(maintenanceTicketId);
