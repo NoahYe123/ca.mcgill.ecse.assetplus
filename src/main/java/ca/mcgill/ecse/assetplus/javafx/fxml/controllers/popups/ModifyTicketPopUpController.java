@@ -33,39 +33,27 @@ public class ModifyTicketPopUpController{
 	@FXML
 	private Button cancelButton;
 	
-	    
-	   
 	@FXML 
 	private TextField idField; 
 	
-	    
 	@FXML 
 	private DatePicker raisedOnDatePicker; 
-	   
 	
-	    
-	   
 	@FXML 
 	private TextArea descriptionField; 
-	
-	    
-	   
 	
 	
 	
 
 	// Method Generation
-	
 	@FXML
 	void initialize() {
 		errorMessage.setText(null);
 	}
-	
 	@FXML
 	void cancelClicked(ActionEvent event) {
 		AssetPlusFXMLView.getInstance().closePopUpWindow();
 	}
-	
 	@FXML
 	void updateMaintenanceTicketClicked(ActionEvent event) {
 		String id = idField.getText();
@@ -86,7 +74,6 @@ public class ModifyTicketPopUpController{
 			}
 		}
 	}
-	
 	public void setTicketId(int id) {	
 		MaintenanceTicketId = id;
 		MaintenanceTicket = AssetPlusFeatureSet6Controller.getTicket(MaintenanceTicketId);
