@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.TicketStatusController;
+import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.DisplayMaintenanceTicketController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils;
 
 public class ViewTicketPopUpController {

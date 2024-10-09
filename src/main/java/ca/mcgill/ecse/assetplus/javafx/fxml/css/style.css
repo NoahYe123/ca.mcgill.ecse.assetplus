@@ -368,7 +368,7 @@ Stylesheet of our UI
     -icon-paint: black;
 }
 
-.icon-notes {
+.icon-ticketNotes {
     -icon-paint: #CD6200;
     -fx-background-color: -icon-paint;
     -size: 15;
