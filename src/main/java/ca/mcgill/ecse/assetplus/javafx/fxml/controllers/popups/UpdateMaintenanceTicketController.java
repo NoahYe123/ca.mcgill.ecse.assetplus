@@ -16,16 +16,15 @@ import javafx.scene.control.TextField;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
 
-
-public class ModifyTicketPopUpController{
+public class UpdateMaintenanceTicketController{
 	
     // Private Fields Generation
 	@FXML
 	private Label errorMessage;
 	
-	private int MaintenanceTicketId;
+	private int maintenanceTicketId;
 	
-	private static TOMaintenanceTicket MaintenanceTicket; 
+	private static TOMaintenanceTicket maintenanceTicket; 
 	
 	@FXML
 	private Button modifyMaintenanceTicketButton;
@@ -41,6 +40,7 @@ public class ModifyTicketPopUpController{
 	
 	@FXML 
 	private TextArea descriptionField; 
+	
 	
 	
 	
@@ -75,11 +75,13 @@ public class ModifyTicketPopUpController{
 		}
 	}
 	public void setTicketId(int id) {	
-		MaintenanceTicketId = id;
-		MaintenanceTicket = AssetPlusFeatureSet6Controller.getTicket(MaintenanceTicketId);
+		maintenanceTicketId = id;
+		maintenanceTicket = AssetPlusFeatureSet6Controller.getTicket(maintenanceTicketId);
+		idField.setEditable(false);
+		idField.setText(Integer.toString(maintenanceTicketId));
 		raisedOnDatePicker.setEditable(false);
-		raisedOnDatePicker.setValue(MaintenanceTicket.getRaisedOnDate().toLocalDate());
-		descriptionField.setText(MaintenanceTicket.getDescription());
+		raisedOnDatePicker.setValue(maintenanceTicket.getRaisedOnDate().toLocalDate());
+		descriptionField.setText(maintenanceTicket.getDescription());
 		errorMessage.setText(null);
 	}
 }

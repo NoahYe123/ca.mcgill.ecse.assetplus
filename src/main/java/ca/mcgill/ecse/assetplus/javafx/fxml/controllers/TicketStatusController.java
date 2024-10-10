@@ -4,7 +4,7 @@ import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.AddMaintenanceTicketController;
 
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ModifyTicketPopUpController;
+import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.UpdateMaintenanceTicketController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.DeleteTicketPopUpController;
 
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewNotesController;
@@ -269,7 +269,7 @@ public class TicketStatusController {
     }
 
     private void handleEditButtonClicked(int ticketId) {
-        ModifyTicketPopUpController controller = (ModifyTicketPopUpController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ModifyTicketPopUp.fxml", "Update Ticket");
+    	UpdateMaintenanceTicketController controller = (UpdateMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ModifyTicketPopUp.fxml", "Update Ticket");
         if (controller==null) System.out.println("controller null");
         System.out.print(controller);
         
