@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.DeleteTicketPopUpController">
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.RemoveMaintenanceTicketController">
    <children>
       <fx:include source="../components/PopUpToolBar.fxml" />
       <HBox>
@@ -38,7 +38,7 @@
                                  <children>
                                     <Rectangle fx:id="fieldBgDelete" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="45.0" layoutY="2.0" stroke="BLACK" strokeType="INSIDE" styleClass="fieldBgDelete" width="414.0" />
                                     <Label contentDisplay="CENTER" layoutX="78.0" layoutY="17.0" prefHeight="31.0" prefWidth="293.0" text="%key.TicketMenu_DeleteMessage1" textAlignment="CENTER" />
-                                    <TextField fx:id="ticketNumberField" layoutX="369.0" layoutY="19.0" prefHeight="26.0" prefWidth="51.0" />
+                                    <TextField fx:id="maintenanceticketIdField" layoutX="369.0" layoutY="19.0" prefHeight="26.0" prefWidth="51.0" />
                                  </children>
                               </Pane>
                            </children>
@@ -49,7 +49,7 @@
                   <HBox alignment="CENTER" layoutX="-1.0" layoutY="195.0" prefHeight="68.0" prefWidth="500.0">
                      <children>
                         <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelClicked" prefHeight="31.0" prefWidth="127.0" text="%key.Cancel" />
-                        <Button fx:id="deleteTicketButton" mnemonicParsing="false" onAction="#deleteTicketClicked" prefHeight="31.0" prefWidth="127.0" styleClass="actionButton" text="%key.TicketMenu_DeleteButton">
+                        <Button fx:id="deleteMaintenanceTicketButton" mnemonicParsing="false" onAction="#deleteMaintenanceTicketClicked" prefHeight="31.0" prefWidth="127.0" styleClass="actionButton" text="%key.TicketMenu_DeleteButton">
                            <HBox.margin>
                               <Insets left="70.0" />
                            </HBox.margin>

@@ -5,7 +5,7 @@ import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.AddMaintenanceTicketController;
 
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.UpdateMaintenanceTicketController;
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.DeleteTicketPopUpController;
+import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.RemoveMaintenanceTicketController;
 
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewNotesController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewTicketPopUpController;
@@ -134,7 +134,7 @@ public class DisplayMaintenanceTicketController{
 				Button trashBtn = new Button();
 				trashBtn.getStyleClass().add("icon-trash");
 				trashBtn.setPickOnBounds(true);
-//				trashBtn.setOnAction(event -> handleTrashButtonClicked(id));
+				trashBtn.setOnAction(event -> handleTrashButtonClicked(id));
 				setCursor(trashBtn);
 				Tooltip trashTooltip = new Tooltip(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketStatus_trash"));
 				trashTooltip.setStyle("-fx-text-fill: #A30D11");
@@ -183,11 +183,11 @@ public class DisplayMaintenanceTicketController{
 	
 	}
 //	
-//	private void handleTrashButtonClicked(int maintenanceTicketId) {
-//	    RemoveMaintenanceTicketFXController.setId(maintenanceTicketId);
-//	    RemoveMaintenanceTicketFXController controller = (RemoveMaintenanceTicketFXController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/DeleteMaintenanceTicketPopUp.fxml", "Delete MaintenanceTicket");
-//	    if (controller==null) System.out.println("controller null");
-//	}
+	private void handleTrashButtonClicked(int maintenanceTicketId) {
+		RemoveMaintenanceTicketController.setId(maintenanceTicketId);
+		RemoveMaintenanceTicketController controller = (RemoveMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/DeleteTicketPopUp.fxml", "Delete MaintenanceTicket");
+	    if (controller==null) System.out.println("controller null");
+	}
 	
 	
 	void handleDatePickerClicked(ActionEvent event) {
