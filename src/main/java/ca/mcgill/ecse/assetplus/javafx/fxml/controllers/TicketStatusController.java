@@ -5,7 +5,7 @@ import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.AddMaintenanceTicketController;
 
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.UpdateMaintenanceTicketController;
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.DeleteTicketPopUpController;
+import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.RemoveMaintenanceTicketController;
 
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewNotesController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewTicketPopUpController;
@@ -278,8 +278,8 @@ public class TicketStatusController {
     }
 
     private void handleTrashButtonClicked(int ticketId) {
-        DeleteTicketPopUpController.setId(ticketId);
-        DeleteTicketPopUpController controller = (DeleteTicketPopUpController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/DeleteTicketPopUp.fxml", "Delete Ticket");
+        RemoveMaintenanceTicketController.setId(ticketId);
+        RemoveMaintenanceTicketController controller = (RemoveMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/DeleteTicketPopUp.fxml", "Delete Ticket");
         if (controller==null) System.out.println("controller null");
     }
 
