@@ -74,7 +74,8 @@ public class UpdateMaintenanceTicketController{
 			}
 		}
 	}
-	public void setTicketId(int id) {	
+	
+	public void setMaintenanceTicketId(int id) {	
 		maintenanceTicketId = id;
 		maintenanceTicket = AssetPlusFeatureSet6Controller.getTicket(maintenanceTicketId);
 		idField.setEditable(false);
@@ -82,6 +83,7 @@ public class UpdateMaintenanceTicketController{
 		raisedOnDatePicker.setEditable(false);
 		raisedOnDatePicker.setValue(maintenanceTicket.getRaisedOnDate().toLocalDate());
 		descriptionField.setText(maintenanceTicket.getDescription());
+	
 		errorMessage.setText(null);
 	}
 }

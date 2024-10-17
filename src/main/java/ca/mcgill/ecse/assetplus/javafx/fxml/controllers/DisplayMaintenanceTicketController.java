@@ -179,7 +179,7 @@ public class DisplayMaintenanceTicketController{
 	private void handleEditButtonClicked(int maintenanceTicketId) {
 		UpdateMaintenanceTicketController controller = (UpdateMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ModifyTicketPopUp.fxml", "Update MaintenanceTicket");
 	    if (controller==null) System.out.println("controller null");
-	    controller.setTicketId(maintenanceTicketId);
+	    controller.setMaintenanceTicketId(maintenanceTicketId);
 	
 	}
 //	
