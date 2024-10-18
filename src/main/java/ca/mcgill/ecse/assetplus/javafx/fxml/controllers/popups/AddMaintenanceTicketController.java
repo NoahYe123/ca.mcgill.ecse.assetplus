@@ -78,7 +78,7 @@ public class AddMaintenanceTicketController{
 				raisedOnDateField.setValue(null);
 				descriptionField.setText("");
 				addMaintenanceTicketError.setText("");
-				AssetPlusFXMLView.getInstance().closePopUpWindow();
+				AssetPlusFXMLView.getInstance().closePopUpWindow();  
 			}
 			else{
 				addMaintenanceTicketError.setText(error);

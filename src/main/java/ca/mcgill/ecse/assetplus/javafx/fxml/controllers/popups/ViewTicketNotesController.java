@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
 
-public class ViewNotesController {
+public class ViewTicketNotesController {
     private int currentTicketNumber;
 
     @FXML
@@ -171,7 +171,7 @@ public class ViewNotesController {
         errorMessage.setText(AssetPlusFXMLView.getInstance().getBundle().getString(message));
     }
 
-    public void setTicketId(int ticketId) {
+    public void setMaintenanceTicketId(int ticketId) {
         currentTicketNumber = ticketId;
         numberLabel.setText(Integer.toString(ticketId));
         refreshView();

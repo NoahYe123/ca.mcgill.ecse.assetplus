@@ -7,8 +7,7 @@ import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.AddMaintenanceTic
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.UpdateMaintenanceTicketController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.RemoveMaintenanceTicketController;
 
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewNotesController;
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewTicketPopUpController;
+import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewTicketNotesController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
@@ -36,12 +35,12 @@ import java.util.ResourceBundle;
 public class DisplayMaintenanceTicketController{
 	
     // Private Fields Generation
-    @FXML
-    private ResourceBundle resources;
-    
+	@FXML
+	private ResourceBundle resources;
+	
 	@FXML
 	private HBox DashboardAndContent;
-
+	
 	@FXML
 	private VBox TopContent;
 	
@@ -64,6 +63,9 @@ public class DisplayMaintenanceTicketController{
 	private TableColumn<TOMaintenanceTicket, String> raisedOnDateColumn;
 	@FXML 
 	private DatePicker raisedOnDateSearch; 
+	
+	@FXML
+	private TableColumn<TOMaintenanceTicket, String> descriptionColumn;
 	
 	
 	private ObservableList<TOMaintenanceTicket> maintenanceTicketList;
@@ -102,15 +104,15 @@ public class DisplayMaintenanceTicketController{
 	public void showTableView(){
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		raisedOnDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRaisedOnDate().toLocalDate().format(formatter)));
+		descriptionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
 	
-		maintenanceTicketList = ViewUtils.getMaintenanceTickets();
+		maintenanceTicketList = ViewUtils.getMaintenanceTickets(); 
 		maintenanceTicketTable.setItems(maintenanceTicketList);
 	
 		maintenanceTicketIdColumn.setCellValueFactory(cellData -> {
 		       int maintenanceTicketId = cellData.getValue().getId();
 		       Hyperlink link = new Hyperlink(String.valueOf(maintenanceTicketId));
 		       link.setStyle("-fx-text-fill: #8768F2; -fx-underline: true; -fx-cursor: hand;");
-//		       link.setOnAction(event -> handleMaintenanceTicketClicked(maintenanceTicketId));
 		
 		       return new SimpleObjectProperty<>(link);
 		});	
@@ -152,7 +154,7 @@ public class DisplayMaintenanceTicketController{
 				Button ticketNotesBtn = new Button();
 				ticketNotesBtn.getStyleClass().add("icon-ticketNotes");
 				ticketNotesBtn.setPickOnBounds(true);
-//				ticketNotesBtn.setOnAction(event -> handleTicketNotesButtonClicked(id));
+				ticketNotesBtn.setOnAction(event -> handleTicketNotesButtonClicked(id));
 				setCursor(ticketNotesBtn);
 				Tooltip ticketNotesTooltip = new Tooltip(AssetPlusFXMLView.getInstance().getBundle().getString("key.TicketStatus_TicketNotes"));
 				ticketNotesTooltip.setStyle("-fx-text-fill: #A30D11");
@@ -166,26 +168,21 @@ public class DisplayMaintenanceTicketController{
 	    });
 	}
 	
+	
 	@FXML
 	void handleAddMaintenanceTicket(ActionEvent event) {
-	     AddMaintenanceTicketController controller = (AddMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/AddTicketPopUp.fxml", "Add Ticket");		
+	     AddMaintenanceTicketController controller = (AddMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/AddTicketPopUp.fxml", "Add Ticket");
 	}
 	
-//	private void handleMaintenanceTicketClicked(int maintenanceTicketId) {
-//	     ViewMaintenanceTicketFXController controller = (ViewMaintenanceTicketFXController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewTicketPopUp.fxml", "View Ticket");
-//	     controller.setTicketId(ticketId);
-//	}
-//	
 	private void handleEditButtonClicked(int maintenanceTicketId) {
-		UpdateMaintenanceTicketController controller = (UpdateMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ModifyTicketPopUp.fxml", "Update MaintenanceTicket");
+	    UpdateMaintenanceTicketController controller = (UpdateMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ModifyMaintenanceTicketPopUp.fxml", "Update MaintenanceTicket");
 	    if (controller==null) System.out.println("controller null");
 	    controller.setMaintenanceTicketId(maintenanceTicketId);
-	
 	}
-//	
+	
 	private void handleTrashButtonClicked(int maintenanceTicketId) {
-		RemoveMaintenanceTicketController.setId(maintenanceTicketId);
-		RemoveMaintenanceTicketController controller = (RemoveMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/DeleteTicketPopUp.fxml", "Delete MaintenanceTicket");
+	    RemoveMaintenanceTicketController.setMaintenanceTicketId(maintenanceTicketId);
+	    RemoveMaintenanceTicketController controller = (RemoveMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/DeleteMaintenanceTicketPopUp.fxml", "Delete MaintenanceTicket");
 	    if (controller==null) System.out.println("controller null");
 	}
 	
@@ -202,11 +199,11 @@ public class DisplayMaintenanceTicketController{
 	}
 	
 	
-
-//	private void handleTicketNotesButtonClicked(int maintenanceTicket) {
-//	    ViewTicketNotesController controller = (ViewTicketNotesController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewTicketNotes.fxml", "View TicketNotes");
-//	    controller.setMaintenanceTicket(maintenanceTicket);
-//	}
+	
+	private void handleTicketNotesButtonClicked(int maintenanceTicket) {
+	    ViewTicketNotesController controller = (ViewTicketNotesController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewTicketNotes.fxml", "View TicketNotes");
+	    controller.setMaintenanceTicketId(maintenanceTicket);
+	}
 	
 	private void setCursor(Button button) {
 	    button.setOnMouseEntered(event -> button.setCursor(Cursor.HAND));

@@ -12,40 +12,16 @@ import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils;
 public class ViewTicketPopUpController {
 
   @FXML
-  private TextField approvalRequiredField;
-
-  @FXML
-  private TextField assetNumberField;
-
-  @FXML
-  private TextField assetTypeField;
-
-  @FXML
-  private TextField assigneeField;
-
-  @FXML
   private TextArea descriptionField;
 
   @FXML
   private Rectangle fieldBg;
 
   @FXML
-  private Button priorityButton;
-
-  @FXML
   private TextField raisedOnDateField;
 
   @FXML
-  private Button statusButton;
-
-  @FXML
   private TextField ticketNumberField;
-
-  @FXML
-  private TextField ticketRaiserField;
-
-  @FXML
-  private TextField timeEstimateField;
 
     private int ticketId;
 
@@ -65,18 +41,5 @@ public class ViewTicketPopUpController {
       raisedOnDateField.setText(ticket.getRaisedOnDate().toString());
       ticketNumberField.setText(String.valueOf(ticket.getId()));
     }
-
-    private String getPriorityStyle(String priority) {
-      switch (priority) {
-        case "Low":
-          return "-fx-background-color: #D3D3D3; -fx-text-fill: #696969; fx-background-radius: 50px";
-        case "Normal":
-          return "-fx-background-color: #EBF9F1; -fx-text-fill: #1F9254; fx-background-radius: 50px";
-        case "Urgent":
-          return "-fx-background-color: #FBE7E8; -fx-text-fill: #A30D11; fx-background-radius: 50px";
-      }
-      return "";
-    }
-
 }
 

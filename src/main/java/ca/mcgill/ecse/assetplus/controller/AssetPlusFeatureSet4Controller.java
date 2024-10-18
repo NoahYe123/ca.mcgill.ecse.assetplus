@@ -83,7 +83,7 @@ public class AssetPlusFeatureSet4Controller {
    * <p>Delete a maintenance ticket with the specified ID from the AssetPlus application instance.</p>
    * @param id the unique number associated to the maintenance ticket
    */
-  public static void deleteMaintenanceTicket(int id) {
+  public static void removeMaintenanceTicket(int id) {
     //Input Validation
     String err = AssetPlusFeatureUtility.isExistingTicket(id);
     

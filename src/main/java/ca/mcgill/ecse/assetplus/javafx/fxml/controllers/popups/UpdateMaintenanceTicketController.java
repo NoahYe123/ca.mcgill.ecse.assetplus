@@ -75,7 +75,7 @@ public class UpdateMaintenanceTicketController{
 		}
 	}
 	
-	public void setMaintenanceTicketId(int id) {	
+	public void setMaintenanceTicketId(int id) {
 		maintenanceTicketId = id;
 		maintenanceTicket = AssetPlusFeatureSet6Controller.getTicket(maintenanceTicketId);
 		idField.setEditable(false);

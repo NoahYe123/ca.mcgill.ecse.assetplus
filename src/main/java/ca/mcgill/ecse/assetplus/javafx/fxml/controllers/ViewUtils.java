@@ -86,9 +86,9 @@ public class ViewUtils {
   }
 
 
-  public static void deleteTicketsWithIds(List<Integer> ticketIds) {
+  public static void removeTicketsWithIds(List<Integer> ticketIds) {
     for (int id: ticketIds) {
-      AssetPlusFeatureSet4Controller.deleteMaintenanceTicket(id);
+      AssetPlusFeatureSet4Controller.removeMaintenanceTicket(id);
     }
   }
   

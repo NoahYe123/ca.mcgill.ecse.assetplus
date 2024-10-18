@@ -23,20 +23,18 @@ public class RemoveMaintenanceTicketController{
 	private Rectangle fieldBgDelete;
 	
 	@FXML
-	private TextField maintenanceticketIdField;
+	private TextField maintenanceTicketIdField;
 	
-	private static int maintenanceticketId;
-	
-	
+	private static int maintenanceTicketId;
 	
 	
-
+	
 	// Method Generation
 	@FXML
 	void initialize() {
-		maintenanceticketIdField.setEditable(false);
-		maintenanceticketIdField.setFocusTraversable(false);
-		maintenanceticketIdField.setText(Integer.toString(maintenanceticketId));
+		maintenanceTicketIdField.setEditable(false);
+		maintenanceTicketIdField.setFocusTraversable(false);
+		maintenanceTicketIdField.setText(Integer.toString(maintenanceTicketId));
 	}
 	
 	@FXML
@@ -46,14 +44,17 @@ public class RemoveMaintenanceTicketController{
 	
 	@FXML
 	void deleteMaintenanceTicketClicked(ActionEvent event) {
-		AssetPlusFeatureSet4Controller.deleteMaintenanceTicket(maintenanceticketId);
-		maintenanceticketIdField.setText("");
+	
+		AssetPlusFeatureSet4Controller.removeMaintenanceTicket(maintenanceTicketId);
+	
+		maintenanceTicketIdField.setText("");
 		ViewUtils.callController("");
 		AssetPlusFXMLView.getInstance().closePopUpWindow();
 	}
 	
-	public static void setId(int id){
-		maintenanceticketId=id;
+	public static void setMaintenanceTicketId(int id) {
+		maintenanceTicketId = id;
+	
 	}
 	
 	
