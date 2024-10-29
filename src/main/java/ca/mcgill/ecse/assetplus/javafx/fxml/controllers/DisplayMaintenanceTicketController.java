@@ -201,7 +201,7 @@ public class DisplayMaintenanceTicketController{
 	
 	
 	private void handleTicketNotesButtonClicked(int maintenanceTicket) {
-	    ViewTicketNotesController controller = (ViewTicketNotesController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewTicketNotes.fxml", "View TicketNotes");
+	    ViewTicketNotesController controller = (ViewTicketNotesController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewNotes.fxml", "View TicketNotes");
 	    controller.setMaintenanceTicketId(maintenanceTicket);
 	}
 	
