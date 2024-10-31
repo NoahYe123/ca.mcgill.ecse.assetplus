@@ -24,17 +24,6 @@
             "assetPlus": {
               "@reference": "../../.."
             }
-          },
-          {
-            "id": 3,
-            "raisedOnDate": "2024-10-18",
-            "description": "byebye1",
-            "ticketNotes": [
-              ""
-            ],
-            "assetPlus": {
-              "@reference": "../../.."
-            }
           }
         ]
       }

@@ -171,13 +171,14 @@ public class DisplayMaintenanceTicketController{
 	
 	@FXML
 	void handleAddMaintenanceTicket(ActionEvent event) {
-	     AddMaintenanceTicketController controller = (AddMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/AddTicketPopUp.fxml", "Add Ticket");
+	     AddMaintenanceTicketController controller = (AddMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/AddMaintenanceTicketPopUp.fxml", "Add MaintenanceTicket");
 	}
 	
 	private void handleEditButtonClicked(int maintenanceTicketId) {
-	    UpdateMaintenanceTicketController controller = (UpdateMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ModifyMaintenanceTicketPopUp.fxml", "Update MaintenanceTicket");
+	    UpdateMaintenanceTicketController controller = (UpdateMaintenanceTicketController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/UpdateMaintenanceTicketPopUp.fxml", "Update MaintenanceTicket");
 	    if (controller==null) System.out.println("controller null");
 	    controller.setMaintenanceTicketId(maintenanceTicketId);
+	
 	}
 	
 	private void handleTrashButtonClicked(int maintenanceTicketId) {
@@ -201,7 +202,7 @@ public class DisplayMaintenanceTicketController{
 	
 	
 	private void handleTicketNotesButtonClicked(int maintenanceTicket) {
-	    ViewTicketNotesController controller = (ViewTicketNotesController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewNotes.fxml", "View TicketNotes");
+	    ViewTicketNotesController controller = (ViewTicketNotesController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewTicketNotes.fxml", "View TicketNotes");
 	    controller.setMaintenanceTicketId(maintenanceTicket);
 	}
 	
