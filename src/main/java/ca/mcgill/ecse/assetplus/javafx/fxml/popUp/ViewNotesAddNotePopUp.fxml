@@ -33,17 +33,6 @@
             </HBox>
          </children>
       </StackPane>
-      <StackPane>
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" stroke="BLACK" strokeType="INSIDE" styleClass="fieldBg" width="240.0" />
-            <HBox alignment="CENTER">
-               <children>
-                  <Label prefWidth="60.0" text="%key.ViewNotes_Author" />
-                  <ComboBox fx:id="authorEmail" prefWidth="150.0" />
-               </children>
-            </HBox>
-         </children>
-      </StackPane>
       <StackPane layoutX="10.0" layoutY="104.0" maxWidth="200.0" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="fieldBg" width="250.0" />

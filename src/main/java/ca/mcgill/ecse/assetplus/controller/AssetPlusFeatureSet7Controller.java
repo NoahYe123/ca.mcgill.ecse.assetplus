@@ -20,8 +20,7 @@ public class AssetPlusFeatureSet7Controller {
    * @param email the email of the note taker
    * @return an empty string or an error message
    */
-  public static String addMaintenanceNote(Date date, String description, int ticketID,
-      String email) {
+  public static String addMaintenanceNote(Date date, String description, int ticketID) {
 
         String err = AssetPlusFeatureUtility.isDescriptionEmpty(description) + 
                      AssetPlusFeatureUtility.isExistingTicket(ticketID);
