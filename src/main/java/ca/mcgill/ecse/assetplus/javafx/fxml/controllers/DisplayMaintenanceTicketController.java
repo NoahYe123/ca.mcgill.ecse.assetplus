@@ -3,11 +3,10 @@ package ca.mcgill.ecse.assetplus.javafx.fxml.controllers;
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.AddMaintenanceTicketController;
-
+import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.DisplayMaintenanceNoteController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.UpdateMaintenanceTicketController;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.RemoveMaintenanceTicketController;
 
-import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.ViewTicketNotesController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
@@ -202,7 +201,7 @@ public class DisplayMaintenanceTicketController{
 	
 	
 	private void handleTicketNotesButtonClicked(int maintenanceTicket) {
-	    ViewTicketNotesController controller = (ViewTicketNotesController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewTicketNotes.fxml", "View TicketNotes");
+		DisplayMaintenanceNoteController controller = (DisplayMaintenanceNoteController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewMaintenanceTicketNotes.fxml", "View TicketNotes");
 	    controller.setMaintenanceTicketId(maintenanceTicket);
 	}
 	

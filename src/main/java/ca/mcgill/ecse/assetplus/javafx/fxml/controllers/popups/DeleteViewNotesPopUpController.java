@@ -9,8 +9,8 @@ import javafx.scene.control.Button;
 
 public class DeleteViewNotesPopUpController {
 
-    private int ticketId;
-    private int index;
+    private static int ticketId;
+    private static int index;
 
     @FXML
     private Button cancelButton;
@@ -38,8 +38,8 @@ public class DeleteViewNotesPopUpController {
       }
     }
 
-    public void setTicketIdAndIndex(int id, int index) {
-      this.ticketId = id;
-      this.index = index;
+    public static void setMaintenanceNoteIdandIndex(int id, int ind) {
+      ticketId = id;
+      index = ind;
     }
 }

@@ -68,11 +68,11 @@ public class ModifyNotePopUpController {
     AssetPlusFXMLView.getInstance().closePopUpWindow();
   }
 
-  public void setTicketIdAndIndex(int id, int index) {
+  public void setMaintenanceTicketIdandIndex(int id, int index) {
     this.ticketId = id;
     this.index = index;
 
-    TOMaintenanceNote note = ViewUtils.getTicketNotes(id).get(index);
+    TOMaintenanceNote note = ViewUtils.getMaintenanceNotes(id).get(index);
     datePicker.setValue(note.getDate().toLocalDate());
     descriptionField.setText(note.getDescription());
   }
