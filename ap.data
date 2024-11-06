@@ -19,7 +19,16 @@
             "raisedOnDate": "2024-10-16",
             "description": "Second ticket",
             "ticketNotes": [
-              ""
+              {
+                "MaintenanceNote": {
+                  "id": 2,
+                  "date": "2024-11-06",
+                  "description": 34,
+                  "ticket": {
+                    "@reference": "../../.."
+                  }
+                }
+              }
             ],
             "assetPlus": {
               "@reference": "../../.."

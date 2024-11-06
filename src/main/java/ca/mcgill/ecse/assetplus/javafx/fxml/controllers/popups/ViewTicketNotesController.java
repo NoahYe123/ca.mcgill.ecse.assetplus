@@ -58,9 +58,9 @@ public class ViewTicketNotesController {
     @FXML
     void AddNote(ActionEvent event) {
         if (currentTicketNumber!=-1) {
-            AddNotePopUpController controller = (AddNotePopUpController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewNotesAddNotePopUp.fxml", "Add Note");
+            AddMaintenanceNoteController controller = (AddMaintenanceNoteController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewNotesAddNotePopUp.fxml", "Add Note");
             if (controller!=null)
-                controller.setTicketId(currentTicketNumber);
+                controller.setMaintenanceTicketId(currentTicketNumber);
             else System.out.println("controller null");
         }
         else {

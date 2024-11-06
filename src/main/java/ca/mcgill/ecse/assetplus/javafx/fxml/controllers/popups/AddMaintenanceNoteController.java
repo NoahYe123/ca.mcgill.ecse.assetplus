@@ -4,7 +4,6 @@ package ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,26 +15,24 @@ import java.sql.Date;
 
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
 
-public class AddMaintenanceTicketController{
+public class AddMaintenanceNoteController{
 	
     // Private Fields Generation
+	private int maintenanceTicketId;
 	
 	@FXML 
-	private Button addMaintenanceTicketButton;
+	private Button addMaintenanceNoteButton;
 	
 	@FXML
-	private Button cancelMaintenanceTicketButton;
+	private Button cancelMaintenanceNoteButton;
 	
 	@FXML
-	private Label addMaintenanceTicketError;
+	private Label addMaintenanceNoteError;
 	
 	@FXML 
-	private TextField idField; 
-	
-	@FXML 
-	private DatePicker raisedOnDatePicker; 
+	private DatePicker datePicker; 
 	
 	@FXML
 	private TextArea descriptionField;
@@ -47,42 +44,39 @@ public class AddMaintenanceTicketController{
 	@FXML
 	void initialize(){
 		
-	   	idField.setEditable(true);
-	   	idField.setFocusTraversable(false);  
-	   	raisedOnDatePicker.setEditable(false);
-	   	raisedOnDatePicker.setValue(LocalDate.now());
+		maintenanceTicketId = -1; 
+	   	datePicker.setEditable(false);
+	   	datePicker.setValue(LocalDate.now());
 	   	descriptionField.setEditable(true);
 	   	descriptionField.setFocusTraversable(false);  
 	
-	   	addMaintenanceTicketError.setText(null);
+	   	addMaintenanceNoteError.setText(null);
 	
 	}	
 
 	@FXML
-	public void addMaintenanceTicketClicked(ActionEvent event){
+	public void addTicketNotesToMaintenanceTicketClicked(ActionEvent event){
 	
-		String id = idField.getText();
-		Date raisedOnDate = Date.valueOf(raisedOnDatePicker.getValue());
+		Date date = Date.valueOf(datePicker.getValue());
 		String description = descriptionField.getText();
 		
 		
-		if(id == null || raisedOnDate == null || description == null){
-			addMaintenanceTicketError.setText("One of the required fields is empty");
+		if(date == null || description == null){
+			addMaintenanceNoteError.setText("One of the required fields is empty");
 		}
 	
 		else {
-			String error = AssetPlusFeatureSet4Controller.addMaintenanceTicket(Integer.parseInt(id), raisedOnDate, description);
+			String error = AssetPlusFeatureSet7Controller.addMaintenanceNote(date, description, maintenanceTicketId);
 			ViewUtils.callController("");
 			
 			if(error == ""){
-				idField.setText("");
-				raisedOnDatePicker.setValue(null);
+				datePicker.setValue(null);
 				descriptionField.setText("");
-				addMaintenanceTicketError.setText("");
+				addMaintenanceNoteError.setText("");
 				AssetPlusFXMLView.getInstance().closePopUpWindow();  
 			}
 			else{
-				addMaintenanceTicketError.setText(error);
+				addMaintenanceNoteError.setText(error);
 			}
 		}
 	}
@@ -92,4 +86,8 @@ public class AddMaintenanceTicketController{
 		 AssetPlusFXMLView.getInstance().closePopUpWindow();
 	}
 
+	public void setMaintenanceTicketId(int id) {
+	  maintenanceTicketId = id;
+	}
+	
 }

@@ -47,7 +47,7 @@
                        
                         <Rectangle fx:id="fieldBg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="28.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="243.0" />
                         <Label layoutX="47.0" layoutY="54.0" prefHeight="39.0" prefWidth="72.0" style="-fx-wrap-text: true;" text="%key.TicketMenu_AddRaisedDate" textAlignment="CENTER" />
-                        <DatePicker fx:id="raisedOnDateField" layoutX="138.0" layoutY="59.0" prefHeight="28.0" prefWidth="118.0" />
+                        <DatePicker fx:id="raisedOnDatePicker" layoutX="138.0" layoutY="59.0" prefHeight="28.0" prefWidth="118.0" />
                         <Button fx:id="addMaintenanceTicketButton" layoutX="70.0" layoutY="345.0" mnemonicParsing="false" onAction="#addMaintenanceTicketClicked" prefHeight="31.0" prefWidth="127.0" text="%key.TicketMenu_Create" />
 
        
