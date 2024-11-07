@@ -136,7 +136,7 @@ public class DisplayMaintenanceNoteController{
 				trashBtn.setPickOnBounds(true);
 				trashBtn.setOnAction(event -> handleTrashButtonClicked(index));
 				setCursor(trashBtn);
-				Tooltip trashTooltip = new Tooltip(AssetPlusFXMLView.getInstance().getBundle().getString("key.MaintenanceNoteStatus_trash"));
+				Tooltip trashTooltip = new Tooltip();
 				trashTooltip.setStyle("-fx-text-fill: #A30D11");
 				trashBtn.setTooltip(trashTooltip);
 	
@@ -145,7 +145,7 @@ public class DisplayMaintenanceNoteController{
 				editBtn.setPickOnBounds(true);
 				editBtn.setOnAction(event -> handleEditButtonClicked(index));
 				setCursor(editBtn);
-				Tooltip editTooltip = new Tooltip(AssetPlusFXMLView.getInstance().getBundle().getString("key.MaintenanceNoteStatus_edit"));
+				Tooltip editTooltip = new Tooltip();
 				editTooltip.setStyle("-fx-text-fill: #A30D11");
 				editBtn.setTooltip(editTooltip);
 	
@@ -162,6 +162,8 @@ public class DisplayMaintenanceNoteController{
 	@FXML
 	void handleAddMaintenanceNote(ActionEvent event) {
 		AddNotePopUpController controller = (AddNotePopUpController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/ViewNotesAddNotePopUp.fxml", "Add MaintenanceNote");
+		if (controller!=null)
+            controller.setTicketId(maintenanceTicketId);
 	}
 	
 	private void handleEditButtonClicked(int index) {

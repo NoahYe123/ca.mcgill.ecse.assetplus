@@ -25,6 +25,14 @@
                     "ticket": {
                       "@reference": "../../.."
                     }
+                  },
+                  {
+                    "id": 1,
+                    "date": "2024-11-07",
+                    "description": "iop",
+                    "ticket": {
+                      "@reference": "../../.."
+                    }
                   }
                 ]
               }
@@ -39,14 +47,24 @@
             "description": "Ticket 2",
             "ticketNotes": [
               {
-                "MaintenanceNote": {
-                  "id": 2,
-                  "date": "2024-11-06",
-                  "description": "asdasdas",
-                  "ticket": {
-                    "@reference": "../../.."
+                "MaintenanceNote": [
+                  {
+                    "id": 2,
+                    "date": "2024-11-06",
+                    "description": "asdasdas",
+                    "ticket": {
+                      "@reference": "../../.."
+                    }
+                  },
+                  {
+                    "id": 2,
+                    "date": "2024-11-07",
+                    "description": "hello",
+                    "ticket": {
+                      "@reference": "../../.."
+                    }
                   }
-                }
+                ]
               }
             ],
             "assetPlus": {
