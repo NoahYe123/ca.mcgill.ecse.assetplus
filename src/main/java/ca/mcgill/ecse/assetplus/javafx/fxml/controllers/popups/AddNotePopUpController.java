@@ -57,9 +57,7 @@ public class AddNotePopUpController {
     String email = authorEmail.getValue();
     Date date = Date.valueOf(datePicker.getValue());
 
-    if (email == null) {
-      errorMessage.setText(AssetPlusFXMLView.getInstance().getBundle().getString("key.AddNote_ErrorAuthor"));
-    } else if (desc.isEmpty()) {
+    if (desc.isEmpty()) {
       errorMessage.setText(AssetPlusFXMLView.getInstance().getBundle().getString("key.AddNote_ErrorDescription"));
     } else if (isDisapproveNote) {
       ViewUtils.callController("");

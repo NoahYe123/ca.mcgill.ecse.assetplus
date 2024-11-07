@@ -1,5 +1,7 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups;
 
+
+
 import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils;
@@ -16,7 +18,11 @@ import javafx.scene.control.TextField;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
 
+
+
+
 public class UpdateMaintenanceTicketController{
+
 	
     // Private Fields Generation
 	@FXML
@@ -26,8 +32,12 @@ public class UpdateMaintenanceTicketController{
 	
 	private static TOMaintenanceTicket maintenanceTicket; 
 	
+	
 	@FXML
 	private Button modifyMaintenanceTicketButton;
+	
+	
+	
 	
 	@FXML
 	private Button cancelButton;
@@ -44,6 +54,7 @@ public class UpdateMaintenanceTicketController{
 	
 	
 	
+	
 
 	// Method Generation
 	@FXML
@@ -52,30 +63,35 @@ public class UpdateMaintenanceTicketController{
 	}
 	@FXML
 	void cancelClicked(ActionEvent event) {
-		AssetPlusFXMLView.getInstance().closePopUpWindow();
+	    AssetPlusFXMLView.getInstance().closePopUpWindow();
 	}
 	@FXML
 	void updateMaintenanceTicketClicked(ActionEvent event) {
-		String id = idField.getText();
+	    String id = idField.getText();
 		Date raisedOnDate = Date.valueOf(raisedOnDatePicker.getValue());
-		String description = descriptionField.getText();
+	    String description = descriptionField.getText();
 		
 		if (id == null || raisedOnDate == null || description == null){
 	
 			errorMessage.setText("One or more input values is/are null!");
 		} else {
 			int idNumber = Integer.parseInt(id);
+	
 			String err = AssetPlusFeatureSet4Controller.updateMaintenanceTicket(idNumber, raisedOnDate, description);
-			ViewUtils.callController(""); 
+	
+			
+			ViewUtils.callController("");
+	
 			if (err.isEmpty()) {
 				AssetPlusFXMLView.getInstance().closePopUpWindow();
 			} else {
-				errorMessage.setText(err);
+			errorMessage.setText(err);
+				
 			}
 		}
 	}
 	
-	public void setMaintenanceTicketId(int id){
+	public void setMaintenanceTicketId(int id) {
 		maintenanceTicketId = id;
 		maintenanceTicket = AssetPlusFeatureSet6Controller.getTicket(maintenanceTicketId);
 		idField.setEditable(false);
@@ -86,4 +102,9 @@ public class UpdateMaintenanceTicketController{
 	
 		errorMessage.setText(null);
 	}
+			
+	
+	
+	
+	
 }

@@ -5,10 +5,29 @@
         "MaintenanceTicket": [
           {
             "id": 1,
-            "raisedOnDate": "2024-10-01",
-            "description": "hello",
+            "raisedOnDate": "2024-10-23",
+            "description": "Ticket one123",
             "ticketNotes": [
-              ""
+              {
+                "MaintenanceNote": [
+                  {
+                    "id": 1,
+                    "date": "2024-11-06",
+                    "description": "12331233123123123213123123333",
+                    "ticket": {
+                      "@reference": "../../.."
+                    }
+                  },
+                  {
+                    "id": 1,
+                    "date": "2024-11-07",
+                    "description": "asdasdsDADSASDAS",
+                    "ticket": {
+                      "@reference": "../../.."
+                    }
+                  }
+                ]
+              }
             ],
             "assetPlus": {
               "@reference": "../../.."
@@ -16,10 +35,19 @@
           },
           {
             "id": 2,
-            "raisedOnDate": "2024-10-16",
-            "description": "Second ticket",
+            "raisedOnDate": "2024-10-23",
+            "description": "Ticket 2",
             "ticketNotes": [
-              ""
+              {
+                "MaintenanceNote": {
+                  "id": 2,
+                  "date": "2024-11-06",
+                  "description": "asdasdas",
+                  "ticket": {
+                    "@reference": "../../.."
+                  }
+                }
+              }
             ],
             "assetPlus": {
               "@reference": "../../.."

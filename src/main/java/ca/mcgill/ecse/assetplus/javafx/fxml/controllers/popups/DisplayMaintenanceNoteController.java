@@ -165,9 +165,9 @@ public class DisplayMaintenanceNoteController{
 	}
 	
 	private void handleEditButtonClicked(int index) {
-		ModifyNotePopUpController controller = (ModifyNotePopUpController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/UpdateMaintenanceNotePopUp.fxml", "Update MaintenanceNote");
+		UpdateMaintenanceNoteController controller = (UpdateMaintenanceNoteController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/UpdateMaintenanceNotePopUp.fxml", "Update MaintenanceNote");
 	    if (controller==null) System.out.println("controller null");
-	    controller.setMaintenanceTicketIdandIndex(maintenanceTicketId, index);
+	    controller.setMaintenanceTicketIdAndIndex(maintenanceTicketId, index);
 	
 	}
 	
