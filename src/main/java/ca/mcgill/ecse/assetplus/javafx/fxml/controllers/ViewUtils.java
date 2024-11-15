@@ -72,7 +72,7 @@ public class ViewUtils {
   }
 
 
-  public static ObservableList<TOMaintenanceNote> getTicketNotes(int id) {
+  public static ObservableList<TOMaintenanceNote> getMaintenanceNotes(int id) {
     TOMaintenanceTicket ticket = AssetPlusFeatureSet6Controller.getTicket(id);
 
     if (ticket==null) {
