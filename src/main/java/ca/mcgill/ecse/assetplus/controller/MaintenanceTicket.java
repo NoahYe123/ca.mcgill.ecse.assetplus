@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!*/
+/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse.assetplus.controller;
 import java.util.*;
@@ -153,9 +153,9 @@ public class MaintenanceTicket
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public MaintenanceNote addTicketNote(int aId, Date aDate, String aDescription)
+  public MaintenanceNote addTicketNote(Date aDate, String aDescription)
   {
-    return new MaintenanceNote(aId, aDate, aDescription, this);
+    return new MaintenanceNote(aDate, aDescription, this);
   }
 
   public boolean addTicketNote(MaintenanceNote aTicketNote)

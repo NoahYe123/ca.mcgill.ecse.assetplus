@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!*/
+/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse.assetplus.controller;
 import java.sql.Date;
@@ -13,7 +13,6 @@ public class TOMaintenanceNote
   //------------------------
 
   //TOMaintenanceNote Attributes
-  private int id;
   private Date date;
   private String description;
 
@@ -21,9 +20,8 @@ public class TOMaintenanceNote
   // CONSTRUCTOR
   //------------------------
 
-  public TOMaintenanceNote(int aId, Date aDate, String aDescription)
+  public TOMaintenanceNote(Date aDate, String aDescription)
   {
-    id = aId;
     date = aDate;
     description = aDescription;
   }
@@ -31,11 +29,6 @@ public class TOMaintenanceNote
   //------------------------
   // INTERFACE
   //------------------------
-
-  public int getId()
-  {
-    return id;
-  }
 
   public Date getDate()
   {
@@ -54,7 +47,6 @@ public class TOMaintenanceNote
   public String toString()
   {
     return super.toString() + "["+
-            "id" + ":" + getId()+ "," +
             "description" + ":" + getDescription()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null");
   }

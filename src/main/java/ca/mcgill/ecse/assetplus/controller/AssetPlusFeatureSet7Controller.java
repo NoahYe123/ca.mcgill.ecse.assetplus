@@ -28,13 +28,15 @@ public class AssetPlusFeatureSet7Controller {
         if (!err.isEmpty()) {
           return err;
         }
+        
 
         try {
           MaintenanceTicket ticket = MaintenanceTicket.getWithId(ticketID);
-          MaintenanceNote note = ticket.addTicketNote(ticketID, date, description);
+          MaintenanceNote note = ticket.addTicketNote(date, description);
           ticket.addTicketNote(note);
 
         } catch (RuntimeException e){
+          System.out.println(e.getMessage());
           return e.getMessage();
         }
         AssetPlusPersistence.save();

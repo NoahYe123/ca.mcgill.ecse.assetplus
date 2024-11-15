@@ -1,8 +1,7 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!*/
+/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse.assetplus.controller;
-import java.util.*;
 import java.sql.Date;
 
 // line 20 "../../../../../AssetPlus.ump"
@@ -10,17 +9,10 @@ public class MaintenanceNote
 {
 
   //------------------------
-  // STATIC VARIABLES
-  //------------------------
-
-  private static Map<Integer, MaintenanceNote> maintenancenotesById = new HashMap<Integer, MaintenanceNote>();
-
-  //------------------------
   // MEMBER VARIABLES
   //------------------------
 
   //MaintenanceNote Attributes
-  private int id;
   private Date date;
   private String description;
 
@@ -31,14 +23,10 @@ public class MaintenanceNote
   // CONSTRUCTOR
   //------------------------
 
-  public MaintenanceNote(int aId, Date aDate, String aDescription, MaintenanceTicket aTicket)
+  public MaintenanceNote(Date aDate, String aDescription, MaintenanceTicket aTicket)
   {
     date = aDate;
     description = aDescription;
-    if (!setId(aId))
-    {
-      throw new RuntimeException("Cannot create due to duplicate id. See http://manual.umple.org?RE003ViolationofUniqueness.html");
-    }
     boolean didAddTicket = setTicket(aTicket);
     if (!didAddTicket)
     {
@@ -49,25 +37,6 @@ public class MaintenanceNote
   //------------------------
   // INTERFACE
   //------------------------
-
-  public boolean setId(int aId)
-  {
-    boolean wasSet = false;
-    Integer anOldId = getId();
-    if (anOldId != null && anOldId.equals(aId)) {
-      return true;
-    }
-    if (hasWithId(aId)) {
-      return wasSet;
-    }
-    id = aId;
-    wasSet = true;
-    if (anOldId != null) {
-      maintenancenotesById.remove(anOldId);
-    }
-    maintenancenotesById.put(aId, this);
-    return wasSet;
-  }
 
   public boolean setDate(Date aDate)
   {
@@ -83,21 +52,6 @@ public class MaintenanceNote
     description = aDescription;
     wasSet = true;
     return wasSet;
-  }
-
-  public int getId()
-  {
-    return id;
-  }
-  /* Code from template attribute_GetUnique */
-  public static MaintenanceNote getWithId(int aId)
-  {
-    return maintenancenotesById.get(aId);
-  }
-  /* Code from template attribute_HasUnique */
-  public static boolean hasWithId(int aId)
-  {
-    return getWithId(aId) != null;
   }
 
   public Date getDate()
@@ -136,7 +90,6 @@ public class MaintenanceNote
 
   public void delete()
   {
-    maintenancenotesById.remove(getId());
     MaintenanceTicket placeholderTicket = ticket;
     this.ticket = null;
     if(placeholderTicket != null)
@@ -149,7 +102,6 @@ public class MaintenanceNote
   public String toString()
   {
     return super.toString() + "["+
-            "id" + ":" + getId()+ "," +
             "description" + ":" + getDescription()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "ticket = "+(getTicket()!=null?Integer.toHexString(System.identityHashCode(getTicket())):"null");

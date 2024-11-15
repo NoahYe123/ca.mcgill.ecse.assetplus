@@ -2,39 +2,41 @@
   "AssetPlus": {
     "maintenanceTickets": [
       {
-        "MaintenanceTicket": [
-          {
-            "id": 1,
-            "raisedOnDate": "2024-10-01",
-            "description": "hello",
-            "ticketNotes": [
-              ""
-            ],
-            "assetPlus": {
-              "@reference": "../../.."
-            }
-          },
-          {
-            "id": 2,
-            "raisedOnDate": "2024-10-16",
-            "description": "Second ticket",
-            "ticketNotes": [
-              {
-                "MaintenanceNote": {
-                  "id": 2,
-                  "date": "2024-11-06",
-                  "description": 34,
+        "MaintenanceTicket": {
+          "id": 1,
+          "raisedOnDate": "2024-11-14",
+          "description": "tes",
+          "ticketNotes": [
+            {
+              "MaintenanceNote": [
+                {
+                  "date": "2024-11-15",
+                  "description": "a",
+                  "ticket": {
+                    "@reference": "../../.."
+                  }
+                },
+                {
+                  "date": "2024-11-15",
+                  "description": "bb",
+                  "ticket": {
+                    "@reference": "../../.."
+                  }
+                },
+                {
+                  "date": "2024-11-15",
+                  "description": "ccc",
                   "ticket": {
                     "@reference": "../../.."
                   }
                 }
-              }
-            ],
-            "assetPlus": {
-              "@reference": "../../.."
+              ]
             }
+          ],
+          "assetPlus": {
+            "@reference": "../../.."
           }
-        ]
+        }
       }
     ]
   }

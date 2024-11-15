@@ -1,6 +1,5 @@
 namespace ca.mcgill.ecse.assetplus.model;
 
-use AssetPlusTransferObjects.ump;
 use AssetPlusPersistence.ump;
 
 class AssetPlus
@@ -19,7 +18,6 @@ class MaintenanceTicket
 
 class MaintenanceNote
 {
-  unique Integer id;
   Date date;
   String description;
 }

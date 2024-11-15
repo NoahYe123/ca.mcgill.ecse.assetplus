@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!*/
+/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
 
 package ca.mcgill.ecse.assetplus.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 2 "../../../../../AssetPlusPersistence.ump"
-// line 6 "../../../../../AssetPlus.ump"
+// line 1 "../../../../../AssetPlusPersistence.ump"
+// line 5 "../../../../../AssetPlus.ump"
 public class AssetPlus
 {
 
@@ -143,7 +143,7 @@ public class AssetPlus
     
   }
 
-  // line 4 "../../../../../AssetPlusPersistence.ump"
+  // line 3 "../../../../../AssetPlusPersistence.ump"
    public void reinitialize(){
     MaintenanceTicket.reinitializeUniqueId(this.getMaintenanceTickets());
   }
