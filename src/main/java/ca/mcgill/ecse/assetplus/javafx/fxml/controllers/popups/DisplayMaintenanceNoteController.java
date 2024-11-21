@@ -174,8 +174,8 @@ public class DisplayMaintenanceNoteController{
 	}
 	
 	private void handleTrashButtonClicked(int index) {
-		DeleteViewNotesPopUpController.setMaintenanceNoteIdandIndex(maintenanceTicketId, index);
-		DeleteViewNotesPopUpController controller = (DeleteViewNotesPopUpController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/DeleteMaintenanceNotePopUp.fxml", "Delete MaintenanceNote");
+		RemoveMaintenanceNoteController.setMaintenanceNoteIndex(maintenanceTicketId, index);
+		RemoveMaintenanceNoteController controller = (RemoveMaintenanceNoteController) AssetPlusFXMLView.getInstance().loadPopupWindow("popUp/DeleteMaintenanceNotePopUp.fxml", "Delete MaintenanceNote");
 	    if (controller==null) System.out.println("controller null");
 	}
 	

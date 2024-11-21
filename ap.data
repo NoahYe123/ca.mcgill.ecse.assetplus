@@ -3,34 +3,18 @@
     "maintenanceTickets": [
       {
         "MaintenanceTicket": {
-          "id": 1,
-          "raisedOnDate": "2024-11-14",
-          "description": "tes",
+          "id": 99,
+          "raisedOnDate": "1997-10-18",
+          "description": "mamma mia",
           "ticketNotes": [
             {
-              "MaintenanceNote": [
-                {
-                  "date": "2024-11-15",
-                  "description": "ab",
-                  "ticket": {
-                    "@reference": "../../.."
-                  }
-                },
-                {
-                  "date": "2024-11-15",
-                  "description": "ffb",
-                  "ticket": {
-                    "@reference": "../../.."
-                  }
-                },
-                {
-                  "date": "2024-11-15",
-                  "description": "ccc",
-                  "ticket": {
-                    "@reference": "../../.."
-                  }
+              "MaintenanceNote": {
+                "date": "2024-11-19",
+                "description": "fddsfsd",
+                "ticket": {
+                  "@reference": "../../.."
                 }
-              ]
+              }
             }
           ],
           "assetPlus": {
