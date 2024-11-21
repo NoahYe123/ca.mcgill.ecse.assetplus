@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.DeleteViewNotesPopUpController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups.RemoveMaintenanceNoteController">
    <children>
       <fx:include source="../components/PopUpToolBar.fxml" />
       <Label styleClass="popUpTitle" text="%key.DeleteNote" textAlignment="CENTER" wrapText="true">
@@ -19,12 +19,12 @@
          </VBox.margin></Label>
       <HBox alignment="CENTER">
          <children>
-            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#Cancel" prefWidth="100.0" styleClass="actionButton" text="%key.Cancel">
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelClicked" prefWidth="100.0" styleClass="actionButton" text="%key.Cancel">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </Button>
-            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#DeleteNote" prefWidth="100.0" styleClass="actionButton" text="%key.Delete">
+            <Button fx:id="deleteMaintenanceNoteButton" mnemonicParsing="false" onAction="#deleteMaintenanceNoteClicked" prefWidth="100.0" styleClass="actionButton" text="%key.Delete">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin></Button>

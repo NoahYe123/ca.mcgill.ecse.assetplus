@@ -1,5 +1,5 @@
 package ca.mcgill.ecse.assetplus.javafx.fxml.controllers.popups;
-import ca.mcgill.ecse.assetplus.controller.TOMaintenanceTicket;
+import ca.mcgill.ecse.assetplus.controller.TOMaintenanceNote;
 import ca.mcgill.ecse.assetplus.javafx.fxml.AssetPlusFXMLView;
 import ca.mcgill.ecse.assetplus.javafx.fxml.controllers.ViewUtils;
 import javafx.event.ActionEvent;
@@ -8,13 +8,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet4Controller;
-import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet6Controller;
+import ca.mcgill.ecse.assetplus.controller.AssetPlusFeatureSet7Controller;
 
-public class RemoveMaintenanceTicketController{
+public class RemoveMaintenanceNoteController{
 	
     // Private Fields Generation
 	@FXML
-	private Button deleteMaintenanceTicketButton;
+	private Button deleteMaintenanceNoteButton;
 	
 	@FXML
 	private Button cancelButton;
@@ -23,6 +23,11 @@ public class RemoveMaintenanceTicketController{
 	private TextField maintenanceTicketIdField;
 	
 	private static int maintenanceTicketId;
+	
+	@FXML
+	private TextField maintenanceNoteIndexField;
+	
+	private static int maintenanceNoteIndex;
 	
 	
 	
@@ -39,15 +44,16 @@ public class RemoveMaintenanceTicketController{
 	}
 	
 	@FXML
-	void deleteMaintenanceTicketClicked(ActionEvent event) {
-		AssetPlusFeatureSet4Controller.removeMaintenanceTicket(maintenanceTicketId);
+	void deleteMaintenanceNoteClicked(ActionEvent event) {
+		AssetPlusFeatureSet7Controller.deleteMaintenanceNote(maintenanceTicketId,maintenanceNoteIndex);
 		
 		ViewUtils.callController("");
 		AssetPlusFXMLView.getInstance().closePopUpWindow();
 	}
 	
-	public static void setMaintenanceTicketId(int id) {
+	public static void setMaintenanceNoteIndex(int id, int index) {
 		maintenanceTicketId = id;
+		maintenanceNoteIndex = index;
 	
 	}
 	
